@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ACG5026 - Exam 1 Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #011426;
+  --bg-grid: rgba(92, 124, 138, 0.05);
+  --card: #0B2A38;
+  --card-hi: #123A4C;
+  --border: rgba(92, 124, 138, 0.28);
+  --border-soft: rgba(92, 124, 138, 0.16);
+  --ink: #F3F7F9;
+  --ink-soft: #9DB2BC;
+  --ink-faint: #6C8391;
+  --accent: #5C7C8A;
+  --accent-bright: #86AAB8;
+  --teal: #1F4959;
+  --charcoal: #242424;
+  --green: #46C89B;
+  --green-bg: rgba(70, 200, 155, 0.14);
+  --green-border: rgba(70, 200, 155, 0.5);
+  --red: #E0705F;
+  --red-bg: rgba(224, 112, 95, 0.15);
+  --red-border: rgba(224, 112, 95, 0.5);
+  --shadow-sm: 0 1px 0 rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.28);
+  --shadow-md: 0 1px 0 rgba(0,0,0,0.2), 0 18px 40px -12px rgba(0,0,0,0.55);
+  --radius: 6px;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+body {
+  background-image:
+    radial-gradient(var(--bg-grid) 0.7px, transparent 0.7px),
+    radial-gradient(1200px 600px at 80% -5%, rgba(31,73,89,0.5), transparent 70%);
+  background-size: 6px 6px, 100% 100%;
+  min-height: 100vh;
+}
+h1, h2, h3 { font-family: 'Spectral', Georgia, serif; margin: 0; }
+p { margin: 0; }
+button { font-family: inherit; }
+::selection { background: var(--accent); color: #fff; }
+
+.page {
+  position: relative; max-width: 820px; margin: 0 auto;
+  padding: 34px 26px 90px 40px;
+  border-left: 1px solid var(--border-soft);
+  min-height: 100vh;
+}
+@media (max-width: 640px) { .page { padding: 22px 14px 60px 18px; } }
+
+.site-header { padding: 44px 0 0; }
+.brand { display: flex; align-items: flex-start; gap: 16px; }
+.brand-mark {
+  flex: none; width: 48px; height: 48px; border-radius: 50%;
+  border: 1.5px solid var(--accent); display: flex; align-items: center; justify-content: center;
+  font-family: 'Spectral', serif; font-size: 22px; font-weight: 600;
+  color: var(--accent-bright); background: var(--card); box-shadow: var(--shadow-sm);
+}
+.brand-text h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+.brand-text p { margin-top: 6px; font-size: 14.5px; color: var(--ink-soft); max-width: 46ch; }
+.brand-text p.brand-by {
+  margin-top: 9px; font-family: 'Spectral', serif; font-weight: 600;
+  font-size: 15.5px; color: var(--accent-bright); letter-spacing: 0.005em;
+}
+.header-rule {
+  height: 1px; margin: 26px 0 30px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0.8;
+}
+.screen { padding-top: 2px; }
+.screen-enter { animation: fadeUp .38s cubic-bezier(.2,.8,.3,1); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.intro-card {
+  position: relative; background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px 22px 26px;
+  box-shadow: var(--shadow-md); margin-bottom: 32px;
+}
+.intro-card::before {
+  content: ""; position: absolute; left: -1px; top: 18px; bottom: 18px;
+  width: 3px; background: var(--accent); border-radius: 2px;
+}
+.intro-kicker {
+  font-family: 'Spectral', serif; font-weight: 600; font-style: italic;
+  color: var(--accent-bright); font-size: 15px; margin-bottom: 9px;
+}
+.intro-text { font-size: 15.5px; line-height: 1.6; color: var(--ink); }
+
+.section-label {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--accent-bright); font-weight: 700; margin: 22px 0 10px;
+}
+.section-label:first-of-type { margin-top: 0; }
+
+.mode-list { display: flex; flex-direction: column; gap: 8px; }
+.mode-row {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 14px; width: 100%; text-align: left;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 15px 17px; cursor: pointer; box-shadow: var(--shadow-sm); color: var(--ink);
+  transition: border-color .15s ease, box-shadow .15s ease, transform .12s ease, background .15s ease;
+}
+.mode-row:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow-md); background: var(--card-hi); }
+.mode-row:disabled { cursor: not-allowed; opacity: 0.45; }
+.mode-num {
+  flex: none; width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid var(--accent); display: flex; align-items: center; justify-content: center;
+  font-size: 12.5px; font-weight: 700; color: var(--accent-bright);
+}
+.mode-info { flex: 1; }
+.mode-name { font-family: 'Spectral', serif; font-size: 17px; font-weight: 600; color: var(--ink); }
+.mode-meta { font-size: 12.5px; color: var(--ink-faint); margin-top: 3px; }
+.mode-tag {
+  flex: none; margin-left: auto; white-space: nowrap; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.07em;
+  font-weight: 700; color: var(--ink-faint); border: 1px solid var(--border);
+  padding: 3px 8px; border-radius: 3px;
+}
+.mode-tag.hard { color: var(--red); border-color: var(--red-border); }
+
+.topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; flex-wrap: wrap; gap: 8px; }
+.topbar-label { font-size: 13.5px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.link-btn {
+  background: none; border: none; color: var(--ink-soft); text-decoration: underline;
+  text-decoration-color: var(--accent); text-underline-offset: 3px; cursor: pointer;
+  padding: 2px 0; font-size: 13.5px;
+  transition: color .12s ease, text-decoration-color .12s ease;
+}
+.link-btn:hover { color: var(--accent-bright); text-decoration-color: var(--accent-bright); }
+.link-btn.subtle { font-size: 14px; text-decoration: none; }
+.link-btn.subtle:hover { text-decoration: underline; }
+.link-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.stamp-btn {
+  position: relative; background: transparent; border: 2px solid var(--accent); color: var(--accent-bright);
+  font-family: 'Spectral', serif; font-weight: 700; font-size: 16px; letter-spacing: 0.02em;
+  padding: 13px 26px; border-radius: 5px; cursor: pointer;
+  transition: transform .15s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.stamp-btn:hover:not(:disabled) { background: var(--accent); color: #fff; box-shadow: 0 10px 24px -8px rgba(92,124,138,0.6); transform: translateY(-1px); }
+.stamp-btn:active:not(:disabled) { transform: scale(0.99); }
+.start-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 6px; }
+.nav-row { display: flex; justify-content: flex-end; margin-top: 20px; gap: 12px; align-items: center; }
+
+.live-score {
+  font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums;
+  background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+  padding: 8px 13px; margin-bottom: 16px; display: inline-block;
+}
+
+/* practice problems: financial statements + reveal */
+.prob-title {
+  font-family: 'Spectral', serif; font-weight: 600; font-size: 20px; text-align: center;
+  color: var(--ink); margin-bottom: 18px;
+}
+.prob-instr {
+  font-size: 15px; line-height: 1.6; color: var(--ink); margin-bottom: 24px;
+}
+.fs-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px 26px; box-shadow: var(--shadow-md); margin-bottom: 22px;
+}
+.fs-wrap { overflow-x: auto; }
+.fs-block { margin: 0 0 26px; }
+.fs-block:last-child { margin-bottom: 0; }
+.fs-table {
+  font-family: 'Spectral', Georgia, serif; border-collapse: collapse;
+  font-variant-numeric: tabular-nums; font-size: 15.5px; color: var(--ink);
+  min-width: 380px;
+}
+.fs-table.two-col { min-width: 440px; }
+.fs-table td { padding: 3px 10px; white-space: nowrap; }
+.fs-table td.lbl { padding-right: 40px; white-space: normal; }
+.fs-table td.amt { text-align: right; width: 110px; }
+.fs-table tr.head td { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; color: var(--accent-bright); border-bottom: 1.5px solid var(--accent); }
+.fs-table tr.head td.section { text-decoration: underline; text-underline-offset: 3px; font-family: 'Spectral', serif; font-size: 16px; color: var(--ink); border-bottom: none; }
+.fs-table tr.indent td.lbl { padding-left: 26px; }
+.fs-table tr.rule td.amt { border-bottom: 1px solid var(--ink-soft); }
+.fs-table tr.total td.amt { border-top: 1px solid var(--ink-soft); }
+.fs-table tr.grand td.amt { border-top: 1px solid var(--ink); border-bottom: 3px double var(--ink); font-weight: 700; }
+.fs-spacer td { height: 12px; }
+
+.reveal-btn {
+  display: block; width: 100%; text-align: center; cursor: pointer;
+  background: var(--accent); color: #fff; border: none; border-radius: 5px;
+  font-family: 'Spectral', serif; font-weight: 700; font-size: 17px; letter-spacing: 0.01em;
+  padding: 16px 20px; margin: 6px 0 22px;
+  transition: background .14s ease, transform .1s ease, box-shadow .14s ease;
+}
+.reveal-btn:hover { background: var(--accent-bright); box-shadow: 0 12px 26px -10px rgba(92,124,138,0.7); }
+.reveal-btn:active { transform: scale(0.995); }
+
+.newnum-btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  background: transparent; color: var(--accent-bright);
+  border: 2px solid var(--accent); border-radius: 5px;
+  font-family: 'Spectral', serif; font-weight: 700; font-size: 16px; letter-spacing: 0.01em;
+  padding: 12px 22px; margin: 4px 0 14px;
+  transition: background .14s ease, color .14s ease, box-shadow .14s ease, transform .1s ease;
+}
+.newnum-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 10px 24px -10px rgba(92,124,138,0.7); transform: translateY(-1px); }
+.newnum-btn:active { transform: scale(0.99); }
+
+.answer-key { animation: fadeUp .34s ease; }
+.answer-key-head {
+  font-family: 'Spectral', serif; font-weight: 700; font-size: 19px; color: var(--ink);
+  margin-bottom: 6px;
+}
+.answer-key-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 20px; }
+.ak-card {
+  background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+  border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 18px;
+}
+.ak-method { font-family: 'Spectral', serif; font-weight: 700; font-size: 17px; color: var(--accent-bright); margin-bottom: 14px; }
+.ak-table { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14.5px; color: var(--ink); width: 100%; min-width: 340px; }
+.ak-table td { padding: 5px 8px; vertical-align: top; }
+.ak-table td.lbl { padding-right: 24px; }
+.ak-table td.amt { text-align: right; white-space: nowrap; width: 96px; font-family: 'Spectral', serif; }
+.ak-table td.work { font-size: 12.5px; color: var(--ink-soft); font-style: italic; padding-left: 6px; }
+.ak-table tr.total td { border-top: 1px solid var(--ink); font-weight: 700; }
+.ak-table tr.total td.amt { border-bottom: 3px double var(--ink); }
+.ak-note { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin-top: 14px; }
+.ak-note strong { color: var(--accent-bright); }
+
+.txn-list { margin: 0; padding-left: 22px; font-size: 15px; line-height: 1.9; color: var(--ink); }
+.txn-list li { padding-left: 3px; }
+.je-table { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; color: var(--ink); width: 100%; min-width: 360px; }
+.je-table th { font-family: 'Inter', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-bright); font-weight: 700; padding: 0 8px 8px; border-bottom: 1.5px solid var(--accent); text-align: left; }
+.je-table th.num { text-align: right; }
+.je-table td { padding: 4px 8px; }
+.je-table td.je-ref { width: 40px; font-weight: 700; color: var(--ink-soft); }
+.je-table td.je-acct { min-width: 170px; }
+.je-table td.je-num { text-align: right; width: 92px; font-family: 'Spectral', serif; white-space: nowrap; }
+
+.rat { padding: 14px 0; border-bottom: 1px solid var(--border-soft); }
+.rat:last-child { border-bottom: none; }
+.rat-name { font-family: 'Spectral', serif; font-weight: 700; font-size: 16px; color: var(--ink); margin-bottom: 6px; }
+.rat-line { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+.rat-line .num { color: var(--ink); font-variant-numeric: tabular-nums; }
+.rat-result { font-size: 15px; font-weight: 700; color: var(--accent-bright); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.rat-list { margin: 8px 0 0; padding-left: 20px; }
+.rat-list li { margin-bottom: 6px; font-size: 14.5px; line-height: 1.5; }
+
+/* flashcards */
+.flash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 4px; }
+.flash-grid.wide { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+.flash-card { position: relative; height: 190px; perspective: 1300px; cursor: pointer; }
+.flash-card.tall { height: 300px; }
+.flash-inner {
+  position: relative; width: 100%; height: 100%; transition: transform 0.5s cubic-bezier(.4,.2,.2,1);
+  transform-style: preserve-3d;
+}
+.flash-card.flipped .flash-inner { transform: rotateY(180deg); }
+.flash-face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--radius); border: 1px solid var(--border); background: var(--card);
+  box-shadow: var(--shadow-sm); padding: 20px 18px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; gap: 9px; overflow: auto;
+}
+.flash-front { background: linear-gradient(160deg, var(--card-hi), var(--card)); }
+.flash-back { transform: rotateY(180deg); background: var(--card); text-align: left; align-items: stretch; justify-content: flex-start; }
+.flash-name { font-family: 'Spectral', serif; font-weight: 600; font-size: 17px; line-height: 1.34; margin: 0; color: var(--ink); }
+.flash-name.small { font-size: 12.5px; color: var(--accent-bright); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-family: 'Inter', sans-serif; font-weight: 700; }
+.flash-hint { font-size: 11.5px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.07em; margin: 0; }
+.flash-formula { font-size: 15px; line-height: 1.5; margin: 0; color: var(--ink); }
+.flash-frac { display: inline-flex; flex-direction: column; align-items: center; }
+.flash-frac .fnum, .flash-frac .fden { padding: 0 3px; }
+.flash-frac .fbar { width: 100%; height: 1.5px; background: var(--ink); margin: 3px 0; }
+.flash-note { font-size: 12px; color: var(--ink-soft); line-height: 1.5; margin: 6px 0 0; }
+/* objective back content */
+.obj-back { font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+.obj-back ul, .obj-back ol { margin: 6px 0 0; padding-left: 19px; }
+.obj-back li { margin-bottom: 7px; }
+.obj-back li:last-child { margin-bottom: 0; }
+.obj-back .sub { color: var(--ink-soft); }
+.obj-back strong { color: var(--accent-bright); }
+
+.flash-btn {
+  border: 1.5px solid var(--border); background: var(--card); border-radius: 4px;
+  padding: 9px 17px; font-size: 13.5px; font-weight: 600; cursor: pointer; color: var(--ink-soft);
+  transition: border-color .14s ease, color .14s ease, background .14s ease;
+}
+.flash-btn:hover { border-color: var(--accent); color: var(--ink); }
+.flash-btn.know.checked { border-color: var(--green-border); background: var(--green-bg); color: var(--green); }
+.flash-btn.miss.checked { border-color: var(--red-border); background: var(--red-bg); color: var(--red); }
+
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 640px) {
+  .flash-grid, .flash-grid.wide { grid-template-columns: 1fr; }
+  .flash-card { height: 176px; }
+  .flash-card.tall { height: 320px; }
+  .brand-text h1 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <main id="app"></main>
+</div>
+<script>
+"use strict";
+var app = document.getElementById("app");
+
+function h(html) { var d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstChild; }
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function escapeHtml(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function rnd(min, max, step) { step = step || 1; var n = Math.floor(Math.random() * ((max - min) / step + 1)); return min + n * step; }
+function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+function fmt(n) {
+  if (n === null || isNaN(n)) return "";
+  var neg = n < 0, s = Math.abs(Math.round(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return neg ? "(" + s + ")" : s;
+}
+function matchText() { return true; } // placeholder, unused in flashcards-only build
+function scrollTop() { try { window.scrollTo({ top: 0, behavior: "auto" }); } catch (e) {} }
+function render(node) {
+  app.innerHTML = "";
+  node.classList.add("screen", "screen-enter");
+  app.appendChild(node);
+  scrollTop();
+}
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+// ---- Chapter 1 objective flashcards ----
+// front = the learning objective, backHtml = the answer
+var CH1_OBJECTIVES = [
+  { name: "Define an asset",
+    backHtml: '<div class="obj-back"><p>Something you own that provides future economic benefit.</p></div>' },
+  { name: "What is a liability?",
+    backHtml: '<div class="obj-back"><p>A future economic sacrifice, or something that you owe.</p></div>' },
+  { name: "What does it mean to capitalize something?",
+    backHtml: '<div class="obj-back"><p>To classify something as an asset.</p></div>' },
+  { name: "What is an expense?",
+    backHtml: '<div class="obj-back"><p>An expired asset, the using up of an asset. It shows up on the income statement.</p></div>' },
+  { name: "Discuss the general uses of accounting and who uses it",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Accounting</strong> is the process of recording, summarizing, and analyzing financial transactions for the purpose of economic decision making.</li>' +
+      '<li>Used <strong>internally</strong> by management and <strong>externally</strong> by shareholders, regulatory agencies, potential employees, creditors, and customers.</li>' +
+      '</ul></div>' },
+  { name: "Discuss the advantages and disadvantages of the corporate entity form",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Advantages:</strong> limited liability, ability to raise capital, separate ownership from management, transferability of ownership.</li>' +
+      '<li><strong>Disadvantages:</strong> double taxation, paperwork and formalities.</li>' +
+      '</ul></div>' },
+  { name: "Relate the three basic business activities to the financial statements",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Operating Activities:</strong> found in the Income Statement, Statement of Stockholder\u2019s Equity, and the Statement of Cash Flows.</li>' +
+      '<li><strong>Investing Activities:</strong> shown on the Balance Sheet and the Statement of Cash Flows.</li>' +
+      '<li><strong>Financing Activities:</strong> shown on the Balance Sheet, Statement of Stockholder\u2019s Equity, Income Statement, and the Statement of Cash Flows.</li>' +
+      '</ul></div>' },
+  { name: "Describe the institutions that regulate financial accounting and their role in establishing GAAP",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>The <strong>Securities &amp; Exchange Commission (SEC)</strong> regulates the issuance and trading of securities in the U.S.</li>' +
+      '<li>The SEC developed the <strong>Financial Accounting Standards Board (FASB)</strong>, which establishes accounting standards (GAAP) in the U.S.</li>' +
+      '</ul></div>' },
+  { name: "Describe what an audit opinion says",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>It expresses an opinion as to whether the financial statements <strong>present fairly</strong> the financial activities of the company, and whether the financials were prepared in accordance with GAAP.</li>' +
+      '</ul></div>' },
+  { name: "Identify the four financial statements and their components and discuss how they are related",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Balance Sheet:</strong> lists the company\u2019s investments and sources of financing using the accounting equation, Assets = Liabilities + Equity. <span class="sub">Income Statement feeds into Retained Earnings; Statement of Stockholder\u2019s Equity represents Contributed Capital.</span></li>' +
+      '<li><strong>Income Statement:</strong> reports the results of a company\u2019s operating activities over a period of time. <span class="sub">Net Income feeds into Retained Earnings on the Balance Sheet.</span></li>' +
+      '<li><strong>Statement of Cash Flows:</strong> reports net cash flows from operating, investing, and financing activities over a period of time. <span class="sub">Uses information from the Balance Sheet and Income Statement.</span></li>' +
+      '<li><strong>Statement of Stockholder\u2019s Equity:</strong> reports on changes in equity over a period of time. <span class="sub">Has Contributed Capital and Retained Earnings, which are on the Balance Sheet.</span></li>' +
+      '</ul></div>' },
+  { name: "Discuss components of the financial accounting conceptual framework",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Benefits &gt; Costs:</strong> reported accounting information must be cost effective.</li>' +
+      '<li><strong>Materiality:</strong> whether a particular amount is large enough to affect a decision.</li>' +
+      '<li><strong>Understandability:</strong> presented so a knowledgeable reader can understand how it relates to the decision process.</li>' +
+      '<li><strong>Relevance:</strong> must have the ability to make a difference in a decision, with Timeliness.</li>' +
+      '<li><strong>Reliability:</strong> must be accurate and free of misstatement or bias.</li>' +
+      '<li><strong>Comparability:</strong> should enable users to identify similarities and differences between sets of economic phenomena.</li>' +
+      '<li><strong>Consistency:</strong> conformity from one reporting period to the next with unchanging policies and procedures.</li>' +
+      '<li><strong>Going Concern:</strong> companies are assumed to have continuity and not go out of business.</li>' +
+      '</ul></div>' }
+];
+
+// ---- Chapter 2 objective flashcards ----
+var CH2_OBJECTIVES = [
+  { name: "Explain when an expenditure should be expensed and when it should be capitalized",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Expensed:</strong> expenses are matched against the related revenue amounts, in the period in which they are incurred.</li>' +
+      '<li><strong>Capitalized:</strong> expenditures are capitalized (placed as an asset on the balance sheet) when they provide future benefit, like prepaid rent.</li>' +
+      '</ul></div>' },
+  { name: "Define basic financial accounting terms",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Balance Sheet terms:</strong> current and noncurrent assets, current and noncurrent liabilities, contributed capital, and retained earnings.</li>' +
+      '<li><strong>Income Statement terms:</strong> revenues, expenses, cost of goods sold, gross profit, net income.</li>' +
+      '</ul></div>' },
+  { name: "Describe cash versus accrual accounting",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Cash-Basis:</strong> recognizes revenues and expenses only when cash is received or paid.</li>' +
+      '<li><strong>Accrual:</strong> recognizes Revenues in the period they are earned and Expenses in the period they are incurred (used to generate revenue).</li>' +
+      '</ul></div>' },
+  { name: "Describe the general concept of when to recognize revenue",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>Revenue recognition requires that revenue be recognized only when it is <strong>(1) earned</strong> and <strong>(2) realized or realizable.</strong></li>' +
+      '</ul></div>' },
+  { name: "Identify two events that affect Retained Earnings and explain how it connects the Income Statement to the Balance Sheet",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>Revenues increase Retained Earnings and expenses decrease Retained Earnings, because Net Income from the Income Statement feeds directly into Retained Earnings.</li>' +
+      '</ul></div>' }
+];
+
+// ---- Chapter 3 objective flashcards ----
+var CH3_OBJECTIVES = [
+  { name: "Identify the steps in the accounting cycle",
+    backHtml: '<div class="obj-back"><ol>' +
+      '<li><strong>Analyze</strong></li>' +
+      '<li><strong>Record</strong> (journalizing)</li>' +
+      '<li><strong>Adjust</strong> (adjustments)</li>' +
+      '<li><strong>Report</strong> (preparing financial statements)</li>' +
+      '<li><strong>Close</strong> (closing entries + post-closing trial balance)</li>' +
+      '</ol></div>' },
+  { name: "Identify the four types of adjustments",
+    backHtml: '<div class="obj-back"><ol>' +
+      '<li><strong>Deferred Revenue</strong> (unearned revenue)</li>' +
+      '<li><strong>Deferred Expense</strong> (prepaid expense)</li>' +
+      '<li><strong>Accrued Revenue</strong></li>' +
+      '<li><strong>Accrued Expense</strong></li>' +
+      '</ol></div>' },
+  { name: "Describe the closing process",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>Balances in temporary income statement accounts are transferred to update retained earnings, then set to zero.</li>' +
+      '<li>Revenues are <strong>debited</strong> and Retained Earnings is <strong>credited.</strong></li>' +
+      '<li>Expenses are <strong>credited</strong> and Retained Earnings is <strong>debited.</strong></li>' +
+      '</ul></div>' }
+];
+
+// ---- Chapter 4 objective flashcards ----
+var CH4_OBJECTIVES = [
+  { name: "Identify and describe the three sections of a Cash Flow Statement",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Operating activities:</strong> cash inflows and outflows directly related to a firm\u2019s day-to-day business activities.</li>' +
+      '<li><strong>Investing activities:</strong> cash inflows and outflows related to acquiring or selling productive assets, and investments in securities of other companies.</li>' +
+      '<li><strong>Financing activities:</strong> cash inflows and outflows related to external sources of financing (debt and equity).</li>' +
+      '</ul></div>' },
+  { name: "Identify which section various financial activities belong to",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>Anything that affects income goes on the <strong>operating</strong> section.</li>' +
+      '</ul></div>' }
+];
+
+// ---- Chapter 5 objective flashcards ----
+var CH5_OBJECTIVES = [
+  { name: "Describe common-size financial statements and their use",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Describe:</strong> restates the financial statement in ratio form.</li>' +
+      '<li><strong>Use:</strong> they facilitate comparisons across companies of different sizes.</li>' +
+      '</ul></div>' },
+  { name: "Discuss the concept of financial leverage",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>The extent to which a company uses debt.</li>' +
+      '<li>The extent to which debt is used to finance a company.</li>' +
+      '</ul></div>' },
+  { name: "Identify the 5 categories of financial ratios",
+    backHtml: '<div class="obj-back"><ol>' +
+      '<li><strong>Return measures</strong> \u2192 ROA, ROE, EWI</li>' +
+      '<li><strong>Profitability measures</strong> \u2192 Profit Margin, Gross Profit Margin</li>' +
+      '<li><strong>Turnover measures</strong> \u2192 A/R turnover, Inventory turnover, PP&amp;E turnover</li>' +
+      '<li><strong>Liquidity measures</strong> \u2192 current ratio, quick ratio, operating cash flows to current liabilities</li>' +
+      '<li><strong>Solvency measures</strong> \u2192 times interest earned, debt to equity</li>' +
+      '</ol></div>' },
+  { name: "Describe the use of financial ratios and measures",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>Used to measure the performance of a firm over a specific period of time.</li>' +
+      '<li>Used to compare a firm\u2019s performance to other firms in that industry.</li>' +
+      '</ul></div>' }
+];
+
+// ---- Chapter 5 formula & ratio flashcards (kept from original site) ----
+var FORMULA_CARDS = [
+  { name: "Return on Equity", num: "Net income", den: "Average stockholders' equity",
+    note: "The return generated for the owners' invested capital." },
+  { name: "Return on Assets", num: "EWI", den: "Average total assets",
+    note: "Average total assets is (beginning + ending) \u00f7 2. EWI is net income plus the after-tax cost of interest, so financing decisions don't distort how well assets generate profit." },
+  { name: "Profit Margin", num: "EWI", den: "Sales revenue",
+    note: "How much of every sales dollar turns into profit, using EWI so the comparison isn't skewed by how the company is financed." },
+  { name: "Gross Profit Margin", num: "Sales revenue \u2212 Cost of goods sold", den: "Sales revenue",
+    note: "The percentage of each sales dollar left after covering the direct cost of the product." },
+  { name: "Accounts Receivable Turnover", num: "Sales revenue", den: "Average accounts receivable",
+    note: "How many times per year the company collects its average receivables balance." },
+  { name: "Inventory Turnover", num: "Cost of goods sold", den: "Average inventory",
+    note: "How many times per year the company sells through its average inventory." },
+  { name: "PP&E Turnover", num: "Sales revenue", den: "Average PP&E",
+    note: "How much sales revenue each dollar of property, plant, and equipment generates." },
+  { name: "Asset Turnover Rate", num: "Sales revenue", den: "Average total assets",
+    note: "How much sales revenue the company generates for every dollar invested in assets overall." },
+  { name: "Current Ratio", num: "Current assets", den: "Current liabilities",
+    note: "A broad measure of whether current assets can cover current liabilities." },
+  { name: "Quick Ratio", num: "Cash + short-term investments + Accounts receivable", den: "Current liabilities",
+    note: "Like the current ratio, but keeps only the assets that convert to cash fastest, leaving out inventory and prepaids." },
+  { name: "Working Capital", flat: "Current assets \u2212 Current liabilities",
+    note: "The dollar cushion of current assets left over after covering current liabilities." },
+  { name: "Debt-to-Equity", num: "Total liabilities", den: "Stockholders' equity",
+    note: "How much the company relies on debt versus owner financing." },
+  { name: "Times Interest Earned", num: "Net income + Tax expense + Interest expense", den: "Interest expense",
+    note: "How many times over the company could pay its interest expense from earnings before tax and interest." },
+  { name: "Operating Cash Flow to Current Liabilities", num: "Cash from operations", den: "Average current liabilities",
+    note: "Measures how well operating cash flow covers short-term obligations; near or above 1 is healthy." },
+  { name: "EWI", flat: "Net income + [Interest expense \u00d7 (1 \u2212 Tax rate)]",
+    note: "Adds back the after-tax cost of interest. Used inside Return on Assets so financing decisions don't distort how well assets generate profit." },
+  { name: "Expense to Sales", num: "Individual expense item", den: "Sales revenue",
+    note: "Shows what percentage of every sales dollar a specific expense consumes." },
+  { name: "Cash Burn Rate", num: "Free cash flow in the period", den: "Number of days in the period",
+    note: "Estimates the average daily cash inflow or outflow; a negative number shows how fast cash reserves are being used up." }
+];
+
+/* =========================================================
+   MODE REGISTRY
+   ========================================================= */
+var MODES = [
+  { id: "ch1obj", group: "Flashcards", name: "Chapter 1 objective flashcards", meta: "11 objectives, flip and grade yourself", kind: "objFlash", data: CH1_OBJECTIVES, tag: "flashcards" },
+  { id: "ch2obj", group: "Flashcards", name: "Chapter 2 objective flashcards", meta: "5 objectives, flip and grade yourself", kind: "objFlash", data: CH2_OBJECTIVES, tag: "flashcards" },
+  { id: "ch3obj", group: "Flashcards", name: "Chapter 3 objectives flashcards", meta: "3 objectives, flip and grade yourself", kind: "objFlash", data: CH3_OBJECTIVES, tag: "flashcards" },
+  { id: "ch4obj", group: "Flashcards", name: "Chapter 4 objectives flashcards", meta: "2 objectives, flip and grade yourself", kind: "objFlash", data: CH4_OBJECTIVES, tag: "flashcards" },
+  { id: "ch5obj", group: "Flashcards", name: "Chapter 5 objectives flashcards", meta: "4 objectives, flip and grade yourself", kind: "objFlash", data: CH5_OBJECTIVES, tag: "flashcards" },
+  { id: "ch5formula", group: "Flashcards", name: "Chapter 5 formulas and ratios flashcards", meta: "17 cards, flip and grade yourself", kind: "formulaFlash", tag: "flashcards" },
+  { id: "ocfprob", group: "Practice Problems", name: "Operating section of cash flows practice (comes from canvas module 4 example)", meta: "Indirect method operating section", kind: "ocfProblem", tag: "reveal answer" },
+  { id: "txnprob", group: "Practice Problems", name: "Creating statements from journal entries (comes from canvas module 2 example)", meta: "8 transactions to journalize", kind: "txnProblem", tag: "reveal answer" },
+  { id: "adjprob", group: "Practice Problems", name: "Adjustment Entries (Comes from ch 3 textbook problem)", meta: "8 adjusting entries", kind: "adjProblem", tag: "reveal answer" },
+  { id: "ratioprob", group: "Practice Problems", name: "Calculating ratios given company information (comes from ch 5 textbook problem)", meta: "12 ratios from company financials", kind: "ratioProblem", tag: "reveal answer" }
+];
+
+/* =========================================================
+   HOME
+   ========================================================= */
+function showHome() {
+  var wrap = document.createElement("div");
+
+  var lastGroup = null, list = null;
+  MODES.forEach(function (m, i) {
+    if (m.group !== lastGroup) {
+      wrap.appendChild(h('<p class="section-label">' + escapeHtml(m.group) + '</p>'));
+      list = h('<div class="mode-list"></div>');
+      wrap.appendChild(list);
+      lastGroup = m.group;
+    }
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "mode-row";
+    btn.innerHTML =
+      '<span class="mode-num">' + (i + 1) + '</span>' +
+      '<span class="mode-info"><span class="mode-name">' + escapeHtml(m.name) + '</span>' +
+      '<span class="mode-meta">' + escapeHtml(m.meta) + '</span></span>' +
+      (m.tag ? '<span class="mode-tag">' + escapeHtml(m.tag) + '</span>' : "");
+    btn.addEventListener("click", function () { launch(m); });
+    list.appendChild(btn);
+  });
+  render(wrap);
+}
+
+function launch(mode) {
+  if (mode.kind === "objFlash") startObjectiveFlash(mode);
+  else if (mode.kind === "formulaFlash") startFormulaFlash(mode);
+  else if (mode.kind === "ocfProblem") startOperatingCFProblem(mode);
+  else if (mode.kind === "txnProblem") startTransactionsProblem(mode);
+  else if (mode.kind === "adjProblem") startAdjustmentsProblem(mode);
+  else if (mode.kind === "ratioProblem") startRatiosProblem(mode);
+}
+
+function homeLink() {
+  var b = document.createElement("button");
+  b.type = "button";
+  b.className = "link-btn subtle";
+  b.innerHTML = "&larr; All decks";
+  b.addEventListener("click", showHome);
+  return b;
+}
+
+/* =========================================================
+   OBJECTIVE FLASHCARDS (front = objective, back = answer)
+   ========================================================= */
+function buildObjCard(cardData) {
+  var outer = h('<div class="flash-card tall"></div>');
+  var inner = h('<div class="flash-inner"></div>');
+  var front = h('<div class="flash-face flash-front"><p class="flash-name">' + escapeHtml(cardData.name) + '</p><p class="flash-hint">Tap to reveal</p></div>');
+  var back = document.createElement("div");
+  back.className = "flash-face flash-back";
+  back.innerHTML = '<p class="flash-name small">' + escapeHtml(cardData.name) + "</p>" + cardData.backHtml;
+  inner.appendChild(front);
+  inner.appendChild(back);
+  outer.appendChild(inner);
+  outer.addEventListener("click", function () { outer.classList.toggle("flipped"); });
+  return outer;
+}
+
+function startObjectiveFlash(mode, cardList) {
+  var cards = shuffle(cardList || mode.data);
+  var wrap = document.createElement("div");
+  var bar = h('<div class="topbar"></div>');
+  bar.appendChild(homeLink());
+  bar.appendChild(h('<div class="topbar-label">' + cards.length + " objectives</div>"));
+  wrap.appendChild(bar);
+  wrap.appendChild(h('<div class="intro-card"><p class="intro-kicker">' + escapeHtml(mode.group) + ' objectives</p>' +
+    '<p class="intro-text">Each card front is a learning objective. Try to say the answer out loud, then tap to flip and check. Mark it \u201cI know it\u201d or \u201cDon\u2019t know,\u201d and review the ones you miss at the bottom.</p></div>'));
+
+  var live = makeLiveScore(cards.length);
+  wrap.appendChild(live.el);
+
+  var missed = [];
+  var reviewBtn = h('<button type="button" class="link-btn" disabled>Review the ones I don\'t know</button>');
+
+  var grid = h('<div class="flash-grid wide"></div>');
+  cards.forEach(function (cardData) {
+    var cell = h('<div></div>');
+    var flash = buildObjCard(cardData);
+    cell.appendChild(flash);
+    var btnRow = h('<div class="start-bar" style="margin-top:12px;justify-content:center;gap:10px" hidden></div>');
+    var knowBtn = h('<button type="button" class="flash-btn know">I know it</button>');
+    var missBtn = h('<button type="button" class="flash-btn miss">Don\'t know</button>');
+    btnRow.appendChild(knowBtn);
+    btnRow.appendChild(missBtn);
+    cell.appendChild(btnRow);
+
+    flash.addEventListener("click", function () {
+      if (flash.classList.contains("flipped")) btnRow.hidden = false;
+    });
+
+    var unit = {};
+    function grade(knew) {
+      knowBtn.classList.toggle("checked", knew);
+      missBtn.classList.toggle("checked", !knew);
+      var idx = missed.indexOf(cardData);
+      if (!knew && idx === -1) missed.push(cardData);
+      if (knew && idx !== -1) missed.splice(idx, 1);
+      reviewBtn.disabled = missed.length === 0;
+      return { right: knew ? 1 : 0, total: 1 };
+    }
+    knowBtn.addEventListener("click", function () { live.apply(unit, grade(true)); });
+    missBtn.addEventListener("click", function () { live.apply(unit, grade(false)); });
+    grid.appendChild(cell);
+  });
+  wrap.appendChild(grid);
+
+  var sb = h('<div class="start-bar" style="margin-top:26px"></div>');
+  var again = h('<button type="button" class="stamp-btn"><span>Shuffle and start over</span></button>');
+  again.addEventListener("click", function () { startObjectiveFlash(mode); });
+  sb.appendChild(again);
+  wrap.appendChild(sb);
+  reviewBtn.addEventListener("click", function () { if (missed.length) startObjectiveFlash(mode, missed.slice()); });
+  var nav = h('<div class="nav-row"></div>');
+  nav.appendChild(reviewBtn);
+  wrap.appendChild(nav);
+  render(wrap);
+}
+
+/* =========================================================
+   FORMULA FLASHCARDS (kept from original)
+   ========================================================= */
+function flashFrac(numText, denText) {
+  return '<span class="flash-frac"><span class="fnum">' + escapeHtml(numText) + '</span><span class="fbar"></span><span class="fden">' + escapeHtml(denText) + "</span></span>";
+}
+function flashFormulaHtml(card) {
+  return card.flat
+    ? '<p class="flash-formula">' + escapeHtml(card.flat) + "</p>"
+    : '<p class="flash-formula">' + flashFrac(card.num, card.den) + "</p>";
+}
+function buildFormulaCard(cardData) {
+  var outer = h('<div class="flash-card"></div>');
+  var inner = h('<div class="flash-inner"></div>');
+  var front = h('<div class="flash-face flash-front"><p class="flash-name">' + escapeHtml(cardData.name) + '</p><p class="flash-hint">Tap to flip</p></div>');
+  var back = document.createElement("div");
+  back.className = "flash-face flash-back";
+  back.style.alignItems = "center";
+  back.style.justifyContent = "center";
+  back.style.textAlign = "center";
+  back.innerHTML = '<p class="flash-name small">' + escapeHtml(cardData.name) + "</p>" +
+    flashFormulaHtml(cardData) + '<p class="flash-note">' + escapeHtml(cardData.note) + "</p>";
+  inner.appendChild(front);
+  inner.appendChild(back);
+  outer.appendChild(inner);
+  outer.addEventListener("click", function () { outer.classList.toggle("flipped"); });
+  return outer;
+}
+
+function startFormulaFlash(mode, cardList) {
+  var cards = shuffle(cardList || FORMULA_CARDS);
+  var wrap = document.createElement("div");
+  var bar = h('<div class="topbar"></div>');
+  bar.appendChild(homeLink());
+  bar.appendChild(h('<div class="topbar-label">' + cards.length + " cards</div>"));
+  wrap.appendChild(bar);
+  wrap.appendChild(h('<div class="intro-card"><p class="intro-kicker">Study these before the exam</p>' +
+    '<p class="intro-text">Tap any card to flip it and see the formula. Then grade yourself honestly: mark it \u201cI know it\u201d or \u201cDon\u2019t know.\u201d Review whatever you mark \u201cDon\u2019t know\u201d at the bottom.</p></div>'));
+
+  var live = makeLiveScore(cards.length);
+  wrap.appendChild(live.el);
+
+  var missed = [];
+  var reviewBtn = h('<button type="button" class="link-btn" disabled>Review the ones I don\'t know</button>');
+
+  var grid = h('<div class="flash-grid"></div>');
+  cards.forEach(function (cardData) {
+    var cell = h('<div></div>');
+    var flash = buildFormulaCard(cardData);
+    cell.appendChild(flash);
+    var btnRow = h('<div class="start-bar" style="margin-top:12px;justify-content:center;gap:10px" hidden></div>');
+    var knowBtn = h('<button type="button" class="flash-btn know">I know it</button>');
+    var missBtn = h('<button type="button" class="flash-btn miss">Don\'t know</button>');
+    btnRow.appendChild(knowBtn);
+    btnRow.appendChild(missBtn);
+    cell.appendChild(btnRow);
+
+    flash.addEventListener("click", function () {
+      if (flash.classList.contains("flipped")) btnRow.hidden = false;
+    });
+
+    var unit = {};
+    function grade(knew) {
+      knowBtn.classList.toggle("checked", knew);
+      missBtn.classList.toggle("checked", !knew);
+      var idx = missed.indexOf(cardData);
+      if (!knew && idx === -1) missed.push(cardData);
+      if (knew && idx !== -1) missed.splice(idx, 1);
+      reviewBtn.disabled = missed.length === 0;
+      return { right: knew ? 1 : 0, total: 1 };
+    }
+    knowBtn.addEventListener("click", function () { live.apply(unit, grade(true)); });
+    missBtn.addEventListener("click", function () { live.apply(unit, grade(false)); });
+    grid.appendChild(cell);
+  });
+  wrap.appendChild(grid);
+
+  var sb = h('<div class="start-bar" style="margin-top:26px"></div>');
+  var again = h('<button type="button" class="stamp-btn"><span>Shuffle and start over</span></button>');
+  again.addEventListener("click", function () { startFormulaFlash(mode); });
+  sb.appendChild(again);
+  wrap.appendChild(sb);
+  reviewBtn.addEventListener("click", function () { if (missed.length) startFormulaFlash(mode, missed.slice()); });
+  var nav = h('<div class="nav-row"></div>');
+  nav.appendChild(reviewBtn);
+  wrap.appendChild(nav);
+  render(wrap);
+}
+
+/* =========================================================
+   PRACTICE PROBLEMS (randomized problem + reveal answer key)
+   ========================================================= */
+function makeReveal(answerNode) {
+  var frag = document.createDocumentFragment();
+  var btn = h('<button type="button" class="reveal-btn">Click to Reveal Answer Key</button>');
+  var holder = h('<div></div>');
+  holder.hidden = true;
+  holder.appendChild(answerNode);
+  btn.addEventListener("click", function () {
+    holder.hidden = false;
+    btn.hidden = true;
+    try { holder.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) {}
+  });
+  frag.appendChild(btn);
+  frag.appendChild(holder);
+  return frag;
+}
+function problemTopbar() {
+  var wrap = document.createElement("div");
+  var bar = h('<div class="topbar"></div>');
+  bar.appendChild(homeLink());
+  bar.appendChild(h('<div class="topbar-label">Work it on paper, then reveal the key</div>'));
+  wrap.appendChild(bar);
+  return wrap;
+}
+function newNumbersBtn(fn) {
+  var b = h('<button type="button" class="newnum-btn">\u21bb New numbers</button>');
+  b.addEventListener("click", fn);
+  return b;
+}
+
+// shared row builders
+function row(label, y2, y1, cls) {
+  return '<tr class="' + (cls || "") + '"><td class="lbl">' + escapeHtml(label) + '</td><td class="amt">' + y2 + '</td><td class="amt">' + y1 + '</td></tr>';
+}
+function row1(label, amt, cls) {
+  return '<tr class="' + (cls || "") + '"><td class="lbl">' + escapeHtml(label) + '</td><td class="amt">' + amt + '</td></tr>';
+}
+function spacer() { return '<tr class="fs-spacer"><td></td><td></td><td></td></tr>'; }
+function akRow(label, amt, work) {
+  return '<tr><td class="lbl">' + escapeHtml(label) + '</td><td class="amt">' + amt + '</td><td class="work">' + escapeHtml(work) + '</td></tr>';
+}
+function akRowTotal(label, amt) {
+  return '<tr class="total"><td class="lbl">' + escapeHtml(label) + '</td><td class="amt">' + amt + '</td><td class="work"></td></tr>';
+}
+function dollar(n) { return "$ " + fmt(n); }
+
+/* ---------- Cash Flows: operating section, indirect (Rainbow Company) ---------- */
+function makeRainbow() {
+  var tries = 0;
+  while (tries < 8000) {
+    tries++;
+    var sales = rnd(250, 520, 1) * 1000;
+    var divIncome = rnd(3, 15, 1) * 500;
+    var totalRev = sales + divIncome;
+    var cogs = Math.round(sales * rnd(50, 62, 1) / 100 / 500) * 500;
+    var wages = Math.round(sales * rnd(12, 22, 1) / 100 / 500) * 500;
+    var dep = rnd(16, 50, 1) * 500;
+    var amort = rnd(3, 12, 1) * 500;
+    var interest = rnd(6, 18, 1) * 500;
+    var tax = rnd(16, 44, 1) * 500;
+    var lossEquip = rnd(2, 10, 1) * 500;
+    var gainInv = rnd(2, 10, 1) * 500;
+    var totalExp = cogs + wages + dep + amort + interest + tax + lossEquip - gainInv;
+    var ni = totalRev - totalExp;
+    function acct(lo, hi, dlo, dhi) { var beg = rnd(lo, hi, 1) * 500; var d = (Math.random() < 0.5 ? -1 : 1) * rnd(dlo, dhi, 1) * 500; return { beg: beg, end: beg + d, d: d }; }
+    var AR = acct(20, 60, 2, 20), Inv = acct(60, 110, 4, 26), Pre = acct(4, 14, 1, 6);
+    var AP = acct(14, 40, 2, 14), IntPay = acct(3, 10, 1, 4), TaxPay = acct(6, 16, 1, 6);
+    var Cash = acct(10, 40, 2, 16);
+    var op = ni + dep + amort + lossEquip - gainInv - AR.d - Inv.d - Pre.d + AP.d + IntPay.d + TaxPay.d;
+    var ok = ni > 15000 && op > 8000 &&
+      AR.end > 2000 && Inv.end > 6000 && Pre.end > 500 && AP.end > 2000 && IntPay.end > 500 && TaxPay.end > 500 && Cash.end > 2000;
+    if (ok) return { sales:sales,divIncome:divIncome,totalRev:totalRev,cogs:cogs,wages:wages,dep:dep,amort:amort,interest:interest,tax:tax,lossEquip:lossEquip,gainInv:gainInv,totalExp:totalExp,ni:ni,AR:AR,Inv:Inv,Pre:Pre,AP:AP,IntPay:IntPay,TaxPay:TaxPay,Cash:Cash,op:op };
+  }
+}
+function startOperatingCFProblem(mode) {
+  var p = makeRainbow();
+  var wrap = problemTopbar();
+
+  var probCard = h('<div class="fs-card"></div>');
+  probCard.appendChild(h('<p class="prob-title">Rainbow Company: Statement of Cash Flows (Indirect Method)</p>'));
+  probCard.appendChild(h('<p class="prob-instr">Rainbow Company\u2019s income statement and the current sections of its comparative balance sheets follow. Prepare the <strong>operating activities section</strong> of the statement of cash flows using the indirect method.</p>'));
+
+  // income statement
+  var is = h('<div class="fs-wrap"></div>');
+  is.innerHTML = '<table class="fs-table"><tbody>' +
+    '<tr class="head"><td class="lbl section">Income Statement</td><td class="amt">Year 8</td></tr>' +
+    row1("Sales", dollar(p.sales)) +
+    row1("Dividend income", fmt(p.divIncome), "rule") +
+    row1("Total revenue", fmt(p.totalRev)) +
+    row1("Cost of goods sold", fmt(p.cogs)) +
+    row1("Wages and other operating expenses", fmt(p.wages)) +
+    row1("Depreciation expense", fmt(p.dep)) +
+    row1("Patent amortization expense", fmt(p.amort)) +
+    row1("Interest expense", fmt(p.interest)) +
+    row1("Income tax expense", fmt(p.tax)) +
+    row1("Loss on sale of equipment", fmt(p.lossEquip)) +
+    row1("Gain on sale of investments", "(" + fmt(p.gainInv) + ")", "rule") +
+    row1("Total expenses", fmt(p.totalExp)) +
+    row1("Net income", dollar(p.ni), "grand") +
+    '</tbody></table>';
+  probCard.appendChild(is);
+
+  // current sections of balance sheet
+  var bs = h('<div class="fs-wrap" style="margin-top:26px"></div>');
+  bs.innerHTML = '<table class="fs-table two-col"><tbody>' +
+    '<tr class="head"><td class="lbl section">Balance Sheet (current items)</td><td class="amt">Dec 31, Yr 8</td><td class="amt">Dec 31, Yr 7</td></tr>' +
+    '<tr class="head"><td class="lbl">Current assets</td><td class="amt"></td><td class="amt"></td></tr>' +
+    row("Cash and cash equivalents", dollar(p.Cash.end), dollar(p.Cash.beg)) +
+    row("Accounts receivable", fmt(p.AR.end), fmt(p.AR.beg)) +
+    row("Inventory", fmt(p.Inv.end), fmt(p.Inv.beg)) +
+    row("Prepaid expenses", fmt(p.Pre.end), fmt(p.Pre.beg)) +
+    spacer() +
+    '<tr class="head"><td class="lbl">Current liabilities</td><td class="amt"></td><td class="amt"></td></tr>' +
+    row("Accounts payable", dollar(p.AP.end), dollar(p.AP.beg)) +
+    row("Interest payable", fmt(p.IntPay.end), fmt(p.IntPay.beg)) +
+    row("Income tax payable", fmt(p.TaxPay.end), fmt(p.TaxPay.beg)) +
+    '</tbody></table>';
+  probCard.appendChild(bs);
+  wrap.appendChild(probCard);
+
+  // answer key
+  function adjRow(label, amt, work) { return akRow(label, fmt(amt), work); }
+  function wcRow(name, a, isAsset) {
+    var d = a.d, contrib = isAsset ? -d : d;
+    var dir = d > 0 ? "increase" : "decrease";
+    return akRow((d > 0 ? "Increase" : "Decrease") + " in " + name, fmt(contrib), fmt(a.beg) + " \u2192 " + fmt(a.end) + ", " + (isAsset ? "asset " : "liability ") + dir);
+  }
+  var ak = h('<div class="answer-key"></div>');
+  ak.appendChild(h('<p class="answer-key-head">Answer Key</p>'));
+  ak.appendChild(h('<p class="answer-key-sub">Net cash provided by operating activities = <strong style="color:var(--ink)">$' + fmt(p.op) + '</strong>.</p>'));
+
+  var card = h('<div class="ak-card"></div>');
+  card.appendChild(h('<p class="ak-method">Operating Activities (Indirect Method)</p>'));
+  card.innerHTML += '<div style="overflow-x:auto"><table class="ak-table"><tbody>' +
+    adjRow("Net income", p.ni, "") +
+    adjRow("Add: Depreciation expense", p.dep, "non-cash, added back") +
+    adjRow("Add: Patent amortization expense", p.amort, "non-cash, added back") +
+    adjRow("Add: Loss on sale of equipment", p.lossEquip, "non-operating loss, reversed out of operating") +
+    adjRow("Deduct: Gain on sale of investments", -p.gainInv, "non-operating gain, reversed out of operating") +
+    wcRow("accounts receivable", p.AR, true) +
+    wcRow("inventory", p.Inv, true) +
+    wcRow("prepaid expenses", p.Pre, true) +
+    wcRow("accounts payable", p.AP, false) +
+    wcRow("interest payable", p.IntPay, false) +
+    wcRow("income tax payable", p.TaxPay, false) +
+    akRowTotal("Net cash provided by operating activities", fmt(p.op)) +
+    '</tbody></table></div>' +
+    '<p class="ak-note"><strong>Two moves in one section.</strong> First, reverse anything in net income that was not an operating cash flow: add back the non-cash expenses (depreciation, amortization) and undo the gain and loss from selling assets (those cash effects live in the investing section). Second, adjust for working capital: an operating asset that goes up is subtracted and a liability that goes up is added; going down flips each.</p>' +
+    '<p class="ak-note"><strong>The gain and loss trip people up.</strong> A gain was added into net income but the cash from that sale is investing, not operating, so subtract the gain here. A loss was subtracted in net income, so add it back. You are not saying the sale was good or bad, only moving it out of the operating section.</p>' +
+    '<p class="ak-note">The change in Cash itself is never an adjustment. The rest of the cash movement (buying and selling assets, borrowing, dividends) shows up in the investing and financing sections, which this problem does not ask for.</p>';
+  ak.appendChild(card);
+
+  wrap.appendChild(newNumbersBtn(function () { startOperatingCFProblem(mode); }));
+  wrap.appendChild(makeReveal(ak));
+  render(wrap);
+}
+
+/* ---------- Transactions to Financial Statements (Paul's Photography) ---------- */
+function makePaul() {
+  var tries = 0, p;
+  while (tries < 6000) {
+    tries++;
+    var stock = rnd(6, 30, 1) * 1000;
+    var loan = rnd(3, 12, 1) * 1000;
+    var landTotal = rnd(6, 20, 1) * 1000;
+    var rent = rnd(2, 8, 1) * 500;
+    var svcCash = rnd(6, 20, 1) * 1000;
+    var svcAr = rnd(2, 10, 1) * 500;
+    var misc = rnd(2, 8, 1) * 500;
+    var parcelCost = Math.round(landTotal * rnd(25, 50, 1) / 100 / 500) * 500;
+    var isGain = Math.random() < 0.5;
+    var deltaLand = rnd(1, 8, 1) * 100;
+    var parcelPrice = isGain ? parcelCost + deltaLand : parcelCost - deltaLand;
+    var gainLoss = parcelPrice - parcelCost;
+    var rev = svcCash + svcAr;
+    var ni = rev - rent - misc + gainLoss;
+    var maxDiv = ni > 0 ? Math.floor(ni / 100) : 0;
+    var div = rnd(2, Math.min(maxDiv, 40), 1) * 100;
+    var re = ni - div;
+    var cash = stock + loan - landTotal - rent + svcCash - misc + parcelPrice - div;
+    var ar = svcAr, land = landTotal - parcelCost;
+    var ta = cash + ar + land, tle = loan + stock + re;
+    var ok = ni > 800 && re > 200 && cash > 1000 && land > 1000 && parcelCost < landTotal &&
+      parcelPrice > 300 && div < ni && ta === tle;
+    if (ok) return { stock:stock,loan:loan,landTotal:landTotal,rent:rent,svcCash:svcCash,svcAr:svcAr,misc:misc,
+      parcelCost:parcelCost,parcelPrice:parcelPrice,gainLoss:gainLoss,isGain:isGain,rev:rev,ni:ni,div:div,re:re,
+      cash:cash,ar:ar,land:land,ta:ta,tle:tle };
+  }
+  return p;
+}
+function startTransactionsProblem(mode) {
+  var p = makePaul();
+  var wrap = problemTopbar();
+
+  var probCard = h('<div class="fs-card"></div>');
+  probCard.appendChild(h('<p class="prob-title">Example: Transactions to Financial Statements</p>'));
+  probCard.appendChild(h('<p class="prob-instr">Paul\u2019s Photography entered into the following transactions during the first year of its operations:</p>'));
+  var txns = [
+    "Collected $" + fmt(p.stock) + " in cash from shareholders.",
+    "Borrowed $" + fmt(p.loan) + " from a bank.",
+    "Purchased two parcels of land for a total of $" + fmt(p.landTotal) + ".",
+    "Paid $" + fmt(p.rent) + " cash to rent camera equipment for the remainder of the year.",
+    "Sold photo services to customers, receiving $" + fmt(p.svcCash) + " in cash and $" + fmt(p.svcAr) + " in receivables.",
+    "Paid miscellaneous expenses of $" + fmt(p.misc) + ".",
+    "Sold one parcel of land with a cost of $" + fmt(p.parcelCost) + " for $" + fmt(p.parcelPrice) + ".",
+    "Paid a $" + fmt(p.div) + " dividend to shareholders."
+  ];
+  probCard.appendChild(h('<ol class="txn-list">' + txns.map(function (t) { return "<li>" + escapeHtml(t) + "</li>"; }).join("") + "</ol>"));
+  probCard.appendChild(h('<p class="prob-instr" style="margin:18px 0 0">Journalize each transaction. Prepare a year-end balance sheet and income statement for the year. Creating T-accounts for some accounts may be useful.</p>'));
+  wrap.appendChild(probCard);
+
+  var ak = h('<div class="answer-key"></div>');
+  ak.appendChild(h('<p class="answer-key-head">Answer Key</p>'));
+  ak.appendChild(h('<p class="answer-key-sub">First year of operations, so retained earnings starts at zero. Everything ties out: total assets = total liabilities and equity = <strong style="color:var(--ink)">$' + fmt(p.ta) + '</strong>.</p>'));
+
+  var je = h('<div class="ak-card"></div>');
+  je.appendChild(h('<p class="ak-method">1. Journal Entries</p>'));
+  function jeRow(ref, acct, dr, cr, indent) {
+    return '<tr><td class="je-ref">' + (ref || "") + '</td><td class="je-acct"' + (indent ? ' style="padding-left:24px"' : '') + '>' + escapeHtml(acct) + '</td><td class="je-num">' + (dr || "") + '</td><td class="je-num">' + (cr || "") + '</td></tr>';
+  }
+  var jeRows = "";
+  jeRows += jeRow("(1)", "Cash", fmt(p.stock), "") + jeRow("", "Common Stock", "", fmt(p.stock), true);
+  jeRows += jeRow("(2)", "Cash", fmt(p.loan), "") + jeRow("", "Notes Payable", "", fmt(p.loan), true);
+  jeRows += jeRow("(3)", "Land", fmt(p.landTotal), "") + jeRow("", "Cash", "", fmt(p.landTotal), true);
+  jeRows += jeRow("(4)", "Rent Expense", fmt(p.rent), "") + jeRow("", "Cash", "", fmt(p.rent), true);
+  jeRows += jeRow("(5)", "Cash", fmt(p.svcCash), "") + jeRow("", "Accounts Receivable", fmt(p.svcAr), "") + jeRow("", "Service Revenue", "", fmt(p.rev), true);
+  jeRows += jeRow("(6)", "Miscellaneous Expense", fmt(p.misc), "") + jeRow("", "Cash", "", fmt(p.misc), true);
+  if (p.isGain) {
+    jeRows += jeRow("(7)", "Cash", fmt(p.parcelPrice), "") + jeRow("", "Land", "", fmt(p.parcelCost), true) + jeRow("", "Gain on Sale of Land", "", fmt(p.gainLoss), true);
+  } else {
+    jeRows += jeRow("(7)", "Cash", fmt(p.parcelPrice), "") + jeRow("", "Loss on Sale of Land", fmt(-p.gainLoss), "") + jeRow("", "Land", "", fmt(p.parcelCost), true);
+  }
+  jeRows += jeRow("(8)", "Retained Earnings (Dividends)", fmt(p.div), "") + jeRow("", "Cash", "", fmt(p.div), true);
+  je.innerHTML += '<div style="overflow-x:auto"><table class="je-table"><thead><tr><th>Ref</th><th>Account</th><th class="num">Debit</th><th class="num">Credit</th></tr></thead><tbody>' + jeRows + '</tbody></table></div>';
+  ak.appendChild(je);
+
+  var isCard = h('<div class="ak-card"></div>');
+  isCard.appendChild(h('<p class="ak-method">2. Income Statement</p>'));
+  var isRows = '<div style="overflow-x:auto"><table class="ak-table"><tbody>' +
+    akRow("Service Revenue", fmt(p.rev), "") +
+    akRow("Rent Expense", fmt(-p.rent), "camera equipment used up this year, so fully expensed") +
+    akRow("Miscellaneous Expense", fmt(-p.misc), "");
+  if (p.isGain) isRows += akRow("Gain on Sale of Land", fmt(p.gainLoss), "sold for more than cost");
+  else isRows += akRow("Loss on Sale of Land", fmt(p.gainLoss), "sold for less than cost");
+  isRows += akRowTotal("Net Income", fmt(p.ni)) + '</tbody></table></div>';
+  isCard.innerHTML += isRows;
+  isCard.innerHTML += '<p class="ak-note">Selling land is not revenue. Only the difference between price and cost is a ' + (p.isGain ? "gain" : "loss") + '. Retained earnings = 0 + ' + fmt(p.ni) + ' net income \u2212 ' + fmt(p.div) + ' dividend = <strong>' + fmt(p.re) + '</strong>.</p>';
+  ak.appendChild(isCard);
+
+  var bsCard = h('<div class="ak-card"></div>');
+  bsCard.appendChild(h('<p class="ak-method">3. Year-End Balance Sheet</p>'));
+  bsCard.innerHTML += '<div style="overflow-x:auto"><table class="ak-table"><tbody>' +
+    akRow("Cash", fmt(p.cash), "") +
+    akRow("Accounts Receivable", fmt(p.ar), "the " + fmt(p.svcAr) + " not yet collected") +
+    akRow("Land", fmt(p.land), fmt(p.landTotal) + " purchased \u2212 " + fmt(p.parcelCost) + " sold") +
+    akRowTotal("Total Assets", fmt(p.ta)) +
+    akRow("Notes Payable", fmt(p.loan), "") +
+    akRow("Common Stock", fmt(p.stock), "") +
+    akRow("Retained Earnings", fmt(p.re), "") +
+    akRowTotal("Total Liabilities and Equity", fmt(p.tle)) +
+    '</tbody></table></div>' +
+    '<p class="ak-note">The dividend reduces retained earnings and is not an expense, so it stays off the income statement. Because it is the first year, retained earnings is built entirely from this year\u2019s net income less the dividend.</p>';
+  ak.appendChild(bsCard);
+
+  wrap.appendChild(newNumbersBtn(function () { startTransactionsProblem(mode); }));
+  wrap.appendChild(makeReveal(ak));
+  render(wrap);
+}
+
+/* ---------- Preparing Adjusting Entries (Kwik Print) ---------- */
+var KWIK_WEEKDAYS = [{ n: "Monday", d: 1 }, { n: "Tuesday", d: 2 }, { n: "Wednesday", d: 3 }, { n: "Thursday", d: 4 }];
+var KWIK_ADFRAC = [{ t: "One-third", f: 1 / 3, m: 3 }, { t: "One-half", f: 1 / 2, m: 2 }, { t: "One-fourth", f: 1 / 4, m: 4 }, { t: "Two-thirds", f: 2 / 3, m: 3 }];
+function makeKwik() {
+  var weekly = rnd(5, 9, 1) * 5000;
+  var daily = weekly / 5;
+  var wd = pick(KWIK_WEEKDAYS);
+  var salAccrued = daily * wd.d;
+  var notes = rnd(200, 500, 1) * 1000;
+  var noteInt = rnd(20, 60, 1) * 100;
+  var fees = rnd(80, 220, 1) * 100;
+  var maintMonths = pick([4, 5, 6]);
+  var maintMonthly = rnd(30, 60, 1) * 100;
+  var maintTotal = maintMonthly * maintMonths;
+  var adf = pick(KWIK_ADFRAC);
+  var adTotal = rnd(20, 70, 1) * adf.m * 100;
+  var adUsed = adTotal * adf.f;
+  var sqft = rnd(6, 12, 1) * 50;
+  var rate = pick([8, 9, 10, 12]);
+  var rentMonthly = sqft * rate;
+  var rentUsed = rentMonthly / 2;
+  var invAmt = rnd(40, 90, 1) * 1000;
+  var intRev = rnd(2, 6, 1) * 100;
+  var depr = rnd(200, 500, 1) * 100;
+  return { weekly:weekly,daily:daily,wd:wd,salAccrued:salAccrued,notes:notes,noteInt:noteInt,fees:fees,
+    maintMonths:maintMonths,maintMonthly:maintMonthly,maintTotal:maintTotal,adf:adf,adTotal:adTotal,adUsed:adUsed,
+    sqft:sqft,rate:rate,rentMonthly:rentMonthly,rentUsed:rentUsed,invAmt:invAmt,intRev:intRev,depr:depr };
+}
+function startAdjustmentsProblem(mode) {
+  var p = makeKwik();
+  var wrap = problemTopbar();
+
+  var probCard = h('<div class="fs-card"></div>');
+  probCard.appendChild(h('<p class="prob-title" style="text-align:left">Preparing Adjusting Entries</p>'));
+  probCard.appendChild(h('<p class="prob-instr">The following information relates to the December 31 adjustments for Kwik Print Company. The firm\u2019s fiscal year ends on December 31.</p>'));
+  var items = [
+    "Weekly employee salaries for a five-day week total $" + fmt(p.weekly) + ", payable on Fridays. December 31 of the current year is a " + p.wd.n + ".",
+    "Kwik Print has $" + fmt(p.notes) + " of notes payable outstanding at December 31. Interest of $" + fmt(p.noteInt) + " has accrued on these notes by December 31 but will not be paid until the notes mature next year.",
+    "During December, Kwik Print provided $" + fmt(p.fees) + " of printing services to clients who will be billed on January 2. The firm uses the account Fees Receivable to reflect amounts due but not yet billed.",
+    "Starting December 1, all maintenance work on Kwik Print\u2019s equipment is handled by Richardson Repair Company under an agreement whereby Kwik Print pays a fixed monthly charge of $" + fmt(p.maintMonthly) + ". Kwik Print paid " + p.maintMonths + " months\u2019 service charge in advance on December 1, debiting Prepaid Maintenance for $" + fmt(p.maintTotal) + ".",
+    "The firm paid $" + fmt(p.adTotal) + " cash on December 15 for a series of radio commercials to run during December and January. " + p.adf.t + " of the commercials have aired by December 31. The $" + fmt(p.adTotal) + " payment was debited to Prepaid Advertising.",
+    "Starting December 16, Kwik Print rented " + fmt(p.sqft) + " square feet of storage space from a neighboring business using a short-term lease. The monthly rent of $" + p.rate + ".00 per square foot is due in advance on the first of each month. Nothing was paid in December, however, because the neighbor agreed to add the rent for the one-half of December to the January 1 payment.",
+    "Kwik Print invested $" + fmt(p.invAmt) + " cash in securities on December 1 and earned interest of $" + fmt(p.intRev) + " on these securities by December 31. No interest payment will be received until January, and the end-of-December market value of the securities remains $" + fmt(p.invAmt) + ".",
+    "Annual depreciation on the firm\u2019s equipment is $" + fmt(p.depr) + ". No depreciation has been recorded during the year."
+  ];
+  probCard.appendChild(h('<ol class="txn-list">' + items.map(function (t) { return "<li>" + escapeHtml(t) + "</li>"; }).join("") + "</ol>"));
+  probCard.appendChild(h('<p class="prob-instr" style="margin:18px 0 0"><strong>Required:</strong> Prepare adjusting entries in journal entry form.</p>'));
+  wrap.appendChild(probCard);
+
+  function jeRow(ref, acct, dr, cr, indent) {
+    return '<tr><td class="je-ref">' + (ref || "") + '</td><td class="je-acct"' + (indent ? ' style="padding-left:24px"' : '') + '>' + escapeHtml(acct) + '</td><td class="je-num">' + (dr || "") + '</td><td class="je-num">' + (cr || "") + '</td></tr>';
+  }
+  var entries = [
+    { d: "Salaries Expense", c: "Salaries Payable", amt: p.salAccrued },
+    { d: "Interest Expense", c: "Interest Payable", amt: p.noteInt },
+    { d: "Fees Receivable", c: "Printing Fees Earned", amt: p.fees },
+    { d: "Maintenance Expense", c: "Prepaid Maintenance", amt: p.maintMonthly },
+    { d: "Advertising Expense", c: "Prepaid Advertising", amt: p.adUsed },
+    { d: "Rent Expense", c: "Rent Payable", amt: p.rentUsed },
+    { d: "Interest Receivable", c: "Interest Revenue", amt: p.intRev },
+    { d: "Depreciation Expense", c: "Accumulated Depreciation, Equipment", amt: p.depr }
+  ];
+  var jeRows = entries.map(function (e, i) {
+    return jeRow("(" + (i + 1) + ")", e.d, fmt(e.amt), "") + jeRow("", e.c, "", fmt(e.amt), true);
+  }).join("");
+
+  var ak = h('<div class="answer-key"></div>');
+  ak.appendChild(h('<p class="answer-key-head">Answer Key</p>'));
+  ak.appendChild(h('<p class="answer-key-sub">Every adjusting entry hits one income statement account and one balance sheet account, and <strong style="color:var(--ink)">never touches Cash.</strong></p>'));
+
+  var je = h('<div class="ak-card"></div>');
+  je.appendChild(h('<p class="ak-method">Adjusting Journal Entries</p>'));
+  je.innerHTML += '<div style="overflow-x:auto"><table class="je-table"><thead><tr><th>Ref</th><th>Account</th><th class="num">Debit</th><th class="num">Credit</th></tr></thead><tbody>' + jeRows + '</tbody></table></div>';
+  ak.appendChild(je);
+
+  var notes = h('<div class="ak-card"></div>');
+  notes.innerHTML = '<p class="ak-method">Where each number comes from</p>' +
+    '<div class="obj-back"><ol>' +
+    '<li><strong>Salaries: ' + fmt(p.salAccrued) + '.</strong> ' + fmt(p.weekly) + ' \u00f7 5 days = ' + fmt(p.daily) + ' per day. Dec 31 is a ' + p.wd.n + ', so ' + p.wd.d + ' day' + (p.wd.d > 1 ? 's are' : ' is') + ' worked but unpaid: ' + p.wd.d + ' \u00d7 ' + fmt(p.daily) + ' = ' + fmt(p.salAccrued) + '.</li>' +
+    '<li><strong>Interest on notes: ' + fmt(p.noteInt) + '.</strong> The accrued amount is given directly. Owed but unpaid, so credit Interest Payable. The ' + fmt(p.notes) + ' note balance is just context.</li>' +
+    '<li><strong>Fees: ' + fmt(p.fees) + '.</strong> Work done but not yet billed is accrued revenue: debit Fees Receivable, credit the revenue account.</li>' +
+    '<li><strong>Maintenance: ' + fmt(p.maintMonthly) + '.</strong> ' + fmt(p.maintTotal) + ' covers ' + p.maintMonths + ' months, so ' + fmt(p.maintMonthly) + ' per month. One month (December) is used, so move ' + fmt(p.maintMonthly) + ' out of Prepaid Maintenance.</li>' +
+    '<li><strong>Advertising: ' + fmt(p.adUsed) + '.</strong> ' + p.adf.t + ' of ' + fmt(p.adTotal) + ' has aired: ' + fmt(p.adTotal) + ' \u00d7 ' + p.adf.t.toLowerCase() + ' = ' + fmt(p.adUsed) + ' used up.</li>' +
+    '<li><strong>Rent: ' + fmt(p.rentUsed) + '.</strong> ' + fmt(p.sqft) + ' sq ft \u00d7 $' + p.rate + '.00 = ' + fmt(p.rentMonthly) + ' per month. Only half of December was used (Dec 16-31), so ' + fmt(p.rentUsed) + '. Nothing paid, so credit Rent Payable.</li>' +
+    '<li><strong>Interest revenue: ' + fmt(p.intRev) + '.</strong> Interest earned but not received is accrued revenue: debit Interest Receivable, credit Interest Revenue. Market value unchanged, so no fair-value entry.</li>' +
+    '<li><strong>Depreciation: ' + fmt(p.depr) + '.</strong> None recorded all year, so the full annual amount is the adjustment. Credit Accumulated Depreciation (a contra-asset), never Equipment itself.</li>' +
+    '</ol></div>' +
+    '<p class="ak-note" style="margin-top:14px"><strong>The pattern:</strong> a prepaid or unearned item that has been used up moves from the balance sheet into an expense or revenue (items 4, 5). An amount earned or incurred but not yet recorded gets accrued with a new receivable or payable (items 1, 2, 3, 6, 7). Depreciation is its own case, using a contra-asset.</p>';
+  ak.appendChild(notes);
+
+  wrap.appendChild(newNumbersBtn(function () { startAdjustmentsProblem(mode); }));
+  wrap.appendChild(makeReveal(ak));
+  render(wrap);
+}
+
+/* ---------- Calculating Ratios (Target-style structure, randomized) ---------- */
+var RATIO_COMPANIES = ["Redwood Retail", "Cornerstone Stores", "Brightline Retail", "Harbor Point Retail", "Cedar & Co.", "Northgate Retail"];
+function makeRatios() {
+  var tries = 0;
+  while (tries < 8000) {
+    tries++;
+    function y() {
+      var cash=rnd(15,40,1)*100, inv=rnd(60,120,1)*100, oca=rnd(10,20,1)*100;
+      var tca=cash+inv+oca;
+      var ppe=rnd(200,300,1)*100, lease=rnd(15,30,1)*100, onca=rnd(8,18,1)*100;
+      var ta=tca+ppe+lease+onca;
+      var ap=rnd(70,120,1)*100, accr=rnd(30,50,1)*100, cpltd=rnd(2,20,1)*100;
+      var tcl=ap+accr+cpltd;
+      var ltd=rnd(80,140,1)*100, nclease=rnd(15,28,1)*100, dit=rnd(8,15,1)*100, oncl=rnd(12,20,1)*100;
+      var tncl=ltd+nclease+dit+oncl;
+      var tl=tcl+tncl, se=ta-tl;
+      return {cash:cash,inv:inv,oca:oca,tca:tca,ppe:ppe,lease:lease,onca:onca,ta:ta,ap:ap,accr:accr,cpltd:cpltd,tcl:tcl,ltd:ltd,nclease:nclease,dit:dit,oncl:oncl,tncl:tncl,tl:tl,se:se};
+    }
+    var cur=y(), pri=y();
+    var sales=rnd(600,900,1)*100;
+    var costSales=Math.round(sales*rnd(66,74,1)/100);
+    var sga=Math.round(sales*rnd(18,24,1)/100);
+    var da=rnd(18,32,1)*100;
+    var opInc=sales-costSales-sga-da;
+    var interest=rnd(30,60,1)*10;
+    var other=rnd(-15,15,1);
+    var ebt=opInc-interest-other;
+    var taxRate=rnd(20,26,1)/100;
+    var tax=Math.round(ebt*taxRate);
+    var niCont=ebt-tax;
+    var disc=rnd(0,30,1);
+    var ni=niCont+disc;
+    var ok = cur.se>4000 && pri.se>4000 && opInc>1500 && ebt>1000 && niCont>500 && cur.tl>cur.se && sales>costSales+sga+da;
+    if (ok) return {company:pick(RATIO_COMPANIES),cur:cur,pri:pri,sales:sales,costSales:costSales,sga:sga,da:da,opInc:opInc,interest:interest,other:other,ebt:ebt,tax:tax,niCont:niCont,disc:disc,ni:ni};
+  }
+}
+function pct(x) { return (x * 100).toFixed(1) + "%"; }
+function dec(x) { return x.toFixed(2); }
+function startRatiosProblem(mode) {
+  var p = makeRatios();
+  var c = p.cur, pr = p.pri;
+  var wrap = problemTopbar();
+
+  var probCard = h('<div class="fs-card"></div>');
+  probCard.appendChild(h('<p class="prob-title">Calculating Ratios: ' + escapeHtml(p.company) + '</p>'));
+  probCard.appendChild(h('<p class="prob-instr">Use the balance sheet and income statement below to calculate the ratios listed underneath. All figures are in $ millions.</p>'));
+
+  var bs = h('<div class="fs-wrap"></div>');
+  bs.innerHTML = '<table class="fs-table two-col"><tbody>' +
+    '<tr class="head"><td class="lbl section">($ millions)</td><td class="amt">Current year</td><td class="amt">Prior year</td></tr>' +
+    '<tr class="head"><td class="lbl">Assets</td><td class="amt"></td><td class="amt"></td></tr>' +
+    row("Cash and cash equivalents", dollar(c.cash), dollar(pr.cash)) +
+    row("Inventory", fmt(c.inv), fmt(pr.inv)) +
+    row("Other current assets", fmt(c.oca), fmt(pr.oca), "rule") +
+    row("Total current assets", fmt(c.tca), fmt(pr.tca), "indent") +
+    row("Property and equipment, net", fmt(c.ppe), fmt(pr.ppe)) +
+    row("Operating lease assets", fmt(c.lease), fmt(pr.lease)) +
+    row("Other noncurrent assets", fmt(c.onca), fmt(pr.onca), "rule") +
+    row("Total assets", dollar(c.ta), dollar(pr.ta), "indent grand") +
+    spacer() +
+    '<tr class="head"><td class="lbl">Liabilities and shareholders\u2019 investment</td><td class="amt"></td><td class="amt"></td></tr>' +
+    row("Accounts payable", dollar(c.ap), dollar(pr.ap)) +
+    row("Accrued and other current liabilities", fmt(c.accr), fmt(pr.accr)) +
+    row("Current portion of long-term debt", fmt(c.cpltd), fmt(pr.cpltd), "rule") +
+    row("Total current liabilities", fmt(c.tcl), fmt(pr.tcl), "indent") +
+    row("Long-term debt and other borrowings", fmt(c.ltd), fmt(pr.ltd)) +
+    row("Noncurrent operating lease liabilities", fmt(c.nclease), fmt(pr.nclease)) +
+    row("Deferred income taxes", fmt(c.dit), fmt(pr.dit)) +
+    row("Other noncurrent liabilities", fmt(c.oncl), fmt(pr.oncl), "rule") +
+    row("Total noncurrent liabilities", fmt(c.tncl), fmt(pr.tncl), "indent") +
+    row("Total shareholders\u2019 investment", fmt(c.se), fmt(pr.se), "rule") +
+    row("Total liabilities and shareholders\u2019 investment", dollar(c.ta), dollar(pr.ta), "indent grand") +
+    '</tbody></table>';
+  probCard.appendChild(bs);
+
+  var is = h('<div class="fs-wrap" style="margin-top:26px"></div>');
+  is.innerHTML = '<table class="fs-table"><tbody>' +
+    '<tr class="head"><td class="lbl section">($ millions)</td><td class="amt">Current fiscal year</td></tr>' +
+    row1("Sales", dollar(p.sales)) +
+    row1("Cost of sales", fmt(p.costSales)) +
+    row1("Selling, general, and administrative expenses", fmt(p.sga)) +
+    row1("Depreciation and amortization", fmt(p.da), "rule") +
+    row1("Operating income", fmt(p.opInc), "total") +
+    row1("Net interest expense", fmt(p.interest)) +
+    row1("Net other (income)/expense", (p.other < 0 ? "(" + fmt(-p.other) + ")" : fmt(p.other)), "rule") +
+    row1("Earnings before income taxes", fmt(p.ebt), "total") +
+    row1("Provision for income taxes", fmt(p.tax), "rule") +
+    row1("Net earnings from continuing operations", fmt(p.niCont), "total") +
+    row1("Discontinued operations, net of tax", fmt(p.disc), "rule") +
+    row1("Net earnings", dollar(p.ni), "grand") +
+    '</tbody></table>';
+  probCard.appendChild(is);
+
+  probCard.appendChild(h('<p class="prob-instr" style="margin:24px 0 0"><strong>Calculate the following ratios for the current fiscal year.</strong> Use average balances (beginning + ending, \u00f7 2) for the balance sheet figures in the return and turnover ratios.</p>'));
+  probCard.appendChild(h('<ol class="rat-list">' +
+    '<li>EWI (earnings without interest)</li><li>Gross profit margin</li><li>Profit margin</li>' +
+    '<li>Return on assets (ROA)</li><li>Return on equity (ROE)</li><li>Asset turnover rate</li>' +
+    '<li>Inventory turnover</li><li>PP&amp;E turnover</li><li>Current ratio</li><li>Working capital</li>' +
+    '<li>Debt-to-equity</li><li>Times interest earned</li>' +
+    '</ol>'));
+  wrap.appendChild(probCard);
+
+  // computed answers
+  var avgTA = (c.ta + pr.ta) / 2, avgSE = (c.se + pr.se) / 2, avgInv = (c.inv + pr.inv) / 2, avgPPE = (c.ppe + pr.ppe) / 2;
+  var taxRate = p.tax / p.ebt;
+  var atInt = p.interest * (1 - taxRate);
+  var ewi = p.ni + atInt;
+
+  var ak = h('<div class="answer-key"></div>');
+  ak.appendChild(h('<p class="answer-key-head">Answer Key</p>'));
+  ak.appendChild(h('<p class="answer-key-sub">Work these two first, everything else uses them: <strong style="color:var(--ink)">tax rate</strong> = ' + fmt(p.tax) + ' \u00f7 ' + fmt(p.ebt) + ' = ' + pct(taxRate) + ', and <strong style="color:var(--ink)">EWI</strong> = ' + fmt(Math.round(ewi)) + '.</p>'));
+
+  var card = h('<div class="ak-card"></div>');
+  card.appendChild(h('<p class="ak-method">Ratio Calculations</p>'));
+  card.innerHTML +=
+    ratBlock("1. EWI (earnings without interest)", "Net income + [Interest expense \u00d7 (1 \u2212 Tax rate)]",
+      '<span class="num">' + fmt(p.ni) + ' + [' + fmt(p.interest) + ' \u00d7 (1 \u2212 ' + dec(taxRate) + ')] = ' + fmt(p.ni) + ' + ' + fmt(Math.round(atInt)) + '</span>',
+      "= $" + fmt(Math.round(ewi)) + " million") +
+    ratBlock("2. Gross profit margin", "(Sales \u2212 Cost of goods sold) \u00f7 Sales",
+      '<span class="num">(' + fmt(p.sales) + ' \u2212 ' + fmt(p.costSales) + ') \u00f7 ' + fmt(p.sales) + '</span>',
+      "= " + pct((p.sales - p.costSales) / p.sales)) +
+    ratBlock("3. Profit margin", "EWI \u00f7 Sales",
+      '<span class="num">' + fmt(Math.round(ewi)) + ' \u00f7 ' + fmt(p.sales) + '</span>',
+      "= " + pct(ewi / p.sales)) +
+    ratBlock("4. Return on assets (ROA)", "EWI \u00f7 Average total assets",
+      '<span class="num">' + fmt(Math.round(ewi)) + ' \u00f7 [(' + fmt(c.ta) + ' + ' + fmt(pr.ta) + ') \u00f7 2] = ' + fmt(Math.round(ewi)) + ' \u00f7 ' + fmt(avgTA) + '</span>',
+      "= " + pct(ewi / avgTA)) +
+    ratBlock("5. Return on equity (ROE)", "Net income \u00f7 Average stockholders\u2019 equity",
+      '<span class="num">' + fmt(p.ni) + ' \u00f7 [(' + fmt(c.se) + ' + ' + fmt(pr.se) + ') \u00f7 2] = ' + fmt(p.ni) + ' \u00f7 ' + fmt(avgSE) + '</span>',
+      "= " + pct(p.ni / avgSE)) +
+    ratBlock("6. Asset turnover rate", "Sales \u00f7 Average total assets",
+      '<span class="num">' + fmt(p.sales) + ' \u00f7 ' + fmt(avgTA) + '</span>',
+      "= " + dec(p.sales / avgTA)) +
+    ratBlock("7. Inventory turnover", "Cost of goods sold \u00f7 Average inventory",
+      '<span class="num">' + fmt(p.costSales) + ' \u00f7 [(' + fmt(c.inv) + ' + ' + fmt(pr.inv) + ') \u00f7 2] = ' + fmt(p.costSales) + ' \u00f7 ' + fmt(avgInv) + '</span>',
+      "= " + dec(p.costSales / avgInv) + " times") +
+    ratBlock("8. PP&E turnover", "Sales \u00f7 Average PP&E",
+      '<span class="num">' + fmt(p.sales) + ' \u00f7 [(' + fmt(c.ppe) + ' + ' + fmt(pr.ppe) + ') \u00f7 2] = ' + fmt(p.sales) + ' \u00f7 ' + fmt(avgPPE) + '</span>',
+      "= " + dec(p.sales / avgPPE) + " times") +
+    ratBlock("9. Current ratio", "Current assets \u00f7 Current liabilities",
+      '<span class="num">' + fmt(c.tca) + ' \u00f7 ' + fmt(c.tcl) + '</span>  (prior year: ' + fmt(pr.tca) + ' \u00f7 ' + fmt(pr.tcl) + ' = ' + dec(pr.tca / pr.tcl) + ')',
+      "= " + dec(c.tca / c.tcl)) +
+    ratBlock("10. Working capital", "Current assets \u2212 Current liabilities",
+      '<span class="num">' + fmt(c.tca) + ' \u2212 ' + fmt(c.tcl) + '</span>',
+      "= " + (c.tca - c.tcl < 0 ? "\u2212$" + fmt(Math.abs(c.tca - c.tcl)) : "$" + fmt(c.tca - c.tcl)) + " million") +
+    ratBlock("11. Debt-to-equity", "Total liabilities \u00f7 Stockholders\u2019 equity",
+      '<span class="num">' + fmt(c.tl) + ' \u00f7 ' + fmt(c.se) + '</span>  (total liabilities = ' + fmt(c.ta) + ' total assets \u2212 ' + fmt(c.se) + ' equity)',
+      "= " + dec(c.tl / c.se)) +
+    ratBlock("12. Times interest earned", "(Net income + Tax expense + Interest expense) \u00f7 Interest expense",
+      '<span class="num">(' + fmt(p.ni) + ' + ' + fmt(p.tax) + ' + ' + fmt(p.interest) + ') \u00f7 ' + fmt(p.interest) + ' = ' + fmt(p.ni + p.tax + p.interest) + ' \u00f7 ' + fmt(p.interest) + '</span>',
+      "= " + dec((p.ni + p.tax + p.interest) / p.interest) + " times");
+  ak.appendChild(card);
+
+  var notes = h('<div class="ak-card"></div>');
+  notes.innerHTML = '<p class="ak-method">Things to watch</p>' +
+    '<p class="ak-note"><strong>Averages vs. point-in-time.</strong> Return and turnover ratios pair a full-year income statement flow with a single-day balance sheet snapshot, so you average beginning and ending balances. Current ratio, working capital, and debt-to-equity are balance sheet vs. balance sheet, so they use one date, no averaging.</p>' +
+    '<p class="ak-note"><strong>EWI is the tricky one.</strong> ROA and profit margin use EWI, not plain net income, so financing choices don\u2019t distort the measure. EWI adds back interest, but only the after-tax cost, which is why you multiply by (1 \u2212 tax rate).</p>' +
+    '<p class="ak-note"><strong>Four flashcard ratios can\u2019t be done here.</strong> Accounts receivable turnover and the quick ratio both need accounts receivable, which is folded into \u201cother current assets.\u201d Operating cash flow to current liabilities needs the cash flow statement, and cash burn rate needs free cash flow, and neither is given.</p>';
+  ak.appendChild(notes);
+
+  wrap.appendChild(newNumbersBtn(function () { startRatiosProblem(mode); }));
+  wrap.appendChild(makeReveal(ak));
+  render(wrap);
+}
+function ratBlock(name, formula, work, result) {
+  return '<div class="rat"><p class="rat-name">' + escapeHtml(name) + '</p>' +
+    '<p class="rat-line">' + formula + '</p>' +
+    '<p class="rat-line">' + work + '</p>' +
+    '<p class="rat-result">' + result + '</p></div>';
+}
+
+
+/* =========================================================
+   SHARED: live self-grade tally
+   ========================================================= */
+function makeLiveScore(totalBoxes) {
+  var checkedBoxes = 0, rightBoxes = 0;
+  var el = h('<div class="live-score"></div>');
+  function renderScore() {
+    el.textContent = checkedBoxes === 0
+      ? totalBoxes + (totalBoxes === 1 ? " card to review" : " cards to review")
+      : rightBoxes + " known, " + (checkedBoxes - rightBoxes) + " to study, " + (totalBoxes - checkedBoxes) + " left";
+  }
+  renderScore();
+  function apply(unit, res) {
+    rightBoxes += res.right - (unit._lastRight || 0);
+    checkedBoxes += res.total - (unit._lastTotal || 0);
+    unit._lastRight = res.right;
+    unit._lastTotal = res.total;
+    renderScore();
+  }
+  return { el: el, apply: apply };
+}
+
+showHome();
+</script>
+</body>
+</html>
