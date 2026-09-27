@@ -244,6 +244,8 @@ button { font-family: inherit; }
 .je-table td.je-ref { width: 40px; font-weight: 700; color: var(--ink-soft); }
 .je-table td.je-acct { min-width: 170px; }
 .je-table td.je-num { text-align: right; width: 92px; font-family: 'Spectral', serif; white-space: nowrap; }
+.je-table tr.memo-row td { padding: 2px 8px 11px; }
+.je-memo { font-size: 12.5px; color: var(--ink-faint); font-style: italic; }
 
 .rat { padding: 14px 0; border-bottom: 1px solid var(--border-soft); }
 .rat:last-child { border-bottom: none; }
@@ -352,7 +354,9 @@ var CH1_OBJECTIVES = [
   { name: "What does it mean to capitalize something?",
     backHtml: '<div class="obj-back"><p>To classify something as an asset.</p></div>' },
   { name: "What is an expense?",
-    backHtml: '<div class="obj-back"><p>An expired asset, the using up of an asset. It shows up on the income statement.</p></div>' },
+    backHtml: '<div class="obj-back"><p>The use of assets to generate revenues. An expired asset, or the using up of an asset. It shows up on the income statement.</p></div>' },
+  { name: "What is a revenue?",
+    backHtml: '<div class="obj-back"><p>Increases in net assets that result from business activities.</p></div>' },
   { name: "Discuss the general uses of accounting and who uses it",
     backHtml: '<div class="obj-back"><ul>' +
       '<li><strong>Accounting</strong> is the process of recording, summarizing, and analyzing financial transactions for the purpose of economic decision making.</li>' +
@@ -373,6 +377,7 @@ var CH1_OBJECTIVES = [
     backHtml: '<div class="obj-back"><ul>' +
       '<li>The <strong>Securities &amp; Exchange Commission (SEC)</strong> regulates the issuance and trading of securities in the U.S.</li>' +
       '<li>The SEC developed the <strong>Financial Accounting Standards Board (FASB)</strong>, which establishes accounting standards (GAAP) in the U.S.</li>' +
+      '<li>The <strong>Public Company Accounting Oversight Board (PCAOB)</strong> approves auditing standards and monitors the quality of financial statements and audits.</li>' +
       '</ul></div>' },
   { name: "Describe what an audit opinion says",
     backHtml: '<div class="obj-back"><ul>' +
@@ -385,16 +390,29 @@ var CH1_OBJECTIVES = [
       '<li><strong>Statement of Cash Flows:</strong> reports net cash flows from operating, investing, and financing activities over a period of time. <span class="sub">Uses information from the Balance Sheet and Income Statement.</span></li>' +
       '<li><strong>Statement of Stockholder\u2019s Equity:</strong> reports on changes in equity over a period of time. <span class="sub">Has Contributed Capital and Retained Earnings, which are on the Balance Sheet.</span></li>' +
       '</ul></div>' },
-  { name: "Discuss components of the financial accounting conceptual framework",
+  { name: "Conceptual framework: objectives of financial reporting",
+    backHtml: '<div class="obj-back"><p>Financial accounting should provide:</p><ul>' +
+      '<li><strong>Information that is useful</strong> to investors, creditors, and other decision makers.</li>' +
+      '<li>Information to help investors and creditors <strong>assess the amount, timing, and uncertainty of cash flows.</strong></li>' +
+      '<li>Information <strong>about economic resources and financial claims</strong> on these resources.</li>' +
+      '<li>Information about a company\u2019s <strong>financial performance.</strong></li>' +
+      '<li>Information that allows decision makers to <strong>monitor company management</strong> to evaluate their effectiveness, efficiency, and ethical stewardship of company resources.</li>' +
+      '</ul></div>' },
+  { name: "Conceptual framework: qualitative characteristics",
     backHtml: '<div class="obj-back"><ul>' +
       '<li><strong>Benefits &gt; Costs:</strong> reported accounting information must be cost effective.</li>' +
       '<li><strong>Materiality:</strong> whether a particular amount is large enough to affect a decision.</li>' +
       '<li><strong>Understandability:</strong> presented so a knowledgeable reader can understand how it relates to the decision process.</li>' +
-      '<li><strong>Relevance:</strong> must have the ability to make a difference in a decision, with Timeliness.</li>' +
+      '<li><strong>Relevance:</strong> must have the ability to make a difference in a decision, with timeliness.</li>' +
       '<li><strong>Reliability:</strong> must be accurate and free of misstatement or bias.</li>' +
       '<li><strong>Comparability:</strong> should enable users to identify similarities and differences between sets of economic phenomena.</li>' +
       '<li><strong>Consistency:</strong> conformity from one reporting period to the next with unchanging policies and procedures.</li>' +
       '<li><strong>Going Concern:</strong> companies are assumed to have continuity and not go out of business.</li>' +
+      '</ul></div>' },
+  { name: "Financial statement links",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li><strong>Balance sheet:</strong> reports the company\u2019s financial position at a point in time.</li>' +
+      '<li><strong>Income statement, statement of cash flows, and statement of stockholders\u2019 equity:</strong> report performance over a period of time.</li>' +
       '</ul></div>' }
 ];
 
@@ -421,7 +439,19 @@ var CH2_OBJECTIVES = [
       '</ul></div>' },
   { name: "Identify two events that affect Retained Earnings and explain how it connects the Income Statement to the Balance Sheet",
     backHtml: '<div class="obj-back"><ul>' +
-      '<li>Revenues increase Retained Earnings and expenses decrease Retained Earnings, because Net Income from the Income Statement feeds directly into Retained Earnings.</li>' +
+      '<li>Net income <strong>increases</strong> Retained Earnings.</li>' +
+      '<li>Net losses and dividends <strong>decrease</strong> Retained Earnings.</li>' +
+      '<li>Net income flows from the Income Statement into Retained Earnings on the Balance Sheet, which is what links the two statements.</li>' +
+      '</ul></div>' },
+  { name: "What is a current asset?",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>Assets expected to be converted into cash or used in operations within the next year, or within the next operating cycle.</li>' +
+      '<li>Listed in order of liquidity.</li>' +
+      '</ul></div>' },
+  { name: "What is a current liability?",
+    backHtml: '<div class="obj-back"><ul>' +
+      '<li>Reported as current liabilities on the balance sheet if due within one year.</li>' +
+      '<li>Listed in order of maturity.</li>' +
       '</ul></div>' }
 ];
 
@@ -533,15 +563,17 @@ var FORMULA_CARDS = [
    MODE REGISTRY
    ========================================================= */
 var MODES = [
-  { id: "ch1obj", group: "Flashcards", name: "Chapter 1 objective flashcards", meta: "11 objectives, flip and grade yourself", kind: "objFlash", data: CH1_OBJECTIVES, tag: "flashcards" },
-  { id: "ch2obj", group: "Flashcards", name: "Chapter 2 objective flashcards", meta: "5 objectives, flip and grade yourself", kind: "objFlash", data: CH2_OBJECTIVES, tag: "flashcards" },
+  { id: "ch1obj", group: "Flashcards", name: "Chapter 1 objective flashcards", meta: "14 objectives, flip and grade yourself", kind: "objFlash", data: CH1_OBJECTIVES, tag: "flashcards" },
+  { id: "ch2obj", group: "Flashcards", name: "Chapter 2 objective flashcards", meta: "7 objectives, flip and grade yourself", kind: "objFlash", data: CH2_OBJECTIVES, tag: "flashcards" },
   { id: "ch3obj", group: "Flashcards", name: "Chapter 3 objectives flashcards", meta: "3 objectives, flip and grade yourself", kind: "objFlash", data: CH3_OBJECTIVES, tag: "flashcards" },
   { id: "ch4obj", group: "Flashcards", name: "Chapter 4 objectives flashcards", meta: "2 objectives, flip and grade yourself", kind: "objFlash", data: CH4_OBJECTIVES, tag: "flashcards" },
   { id: "ch5obj", group: "Flashcards", name: "Chapter 5 objectives flashcards", meta: "4 objectives, flip and grade yourself", kind: "objFlash", data: CH5_OBJECTIVES, tag: "flashcards" },
   { id: "ch5formula", group: "Flashcards", name: "Chapter 5 formulas and ratios flashcards", meta: "17 cards, flip and grade yourself", kind: "formulaFlash", tag: "flashcards" },
   { id: "ocfprob", group: "Practice Problems", name: "Operating section of cash flows practice (comes from canvas module 4 example)", meta: "Indirect method operating section", kind: "ocfProblem", tag: "reveal answer" },
+  { id: "dcfprob", group: "Practice Problems", name: "Operating section of cash flows practice (direct method)", meta: "Direct method operating section", kind: "dcfProblem", tag: "reveal answer" },
   { id: "txnprob", group: "Practice Problems", name: "Creating statements from journal entries (comes from canvas module 2 example)", meta: "8 transactions to journalize", kind: "txnProblem", tag: "reveal answer" },
   { id: "adjprob", group: "Practice Problems", name: "Adjustment Entries (Comes from ch 3 textbook problem)", meta: "8 adjusting entries", kind: "adjProblem", tag: "reveal answer" },
+  { id: "closeprob", group: "Practice Problems", name: "Closing entries practice", meta: "Adjusted trial balance to closing entries", kind: "closeProblem", tag: "reveal answer" },
   { id: "ratioprob", group: "Practice Problems", name: "Calculating ratios given company information (comes from ch 5 textbook problem)", meta: "12 ratios from company financials", kind: "ratioProblem", tag: "reveal answer" }
 ];
 
@@ -577,8 +609,10 @@ function launch(mode) {
   if (mode.kind === "objFlash") startObjectiveFlash(mode);
   else if (mode.kind === "formulaFlash") startFormulaFlash(mode);
   else if (mode.kind === "ocfProblem") startOperatingCFProblem(mode);
+  else if (mode.kind === "dcfProblem") startDirectCFProblem(mode);
   else if (mode.kind === "txnProblem") startTransactionsProblem(mode);
   else if (mode.kind === "adjProblem") startAdjustmentsProblem(mode);
+  else if (mode.kind === "closeProblem") startClosingProblem(mode);
   else if (mode.kind === "ratioProblem") startRatiosProblem(mode);
 }
 
@@ -916,6 +950,155 @@ function startOperatingCFProblem(mode) {
   render(wrap);
 }
 
+/* ---------- Cash Flows: operating section, direct method (real expenses) ---------- */
+var DIRECT_COMPANIES = ["Skyline Company", "Meridian Company", "Delta Supply Co.", "Anchor Company", "Fairview Company"];
+function makeDirect() {
+  var tries = 0;
+  while (tries < 12000) {
+    tries++;
+    var sales = rnd(200, 450, 1) * 1000;
+    var cogs = Math.round(sales * rnd(52, 64, 1) / 100 / 500) * 500;
+    var wages = Math.round(sales * rnd(10, 18, 1) / 100 / 500) * 500;
+    var ins = rnd(6, 20, 1) * 500;
+    var rent = rnd(8, 26, 1) * 500;
+    var dep = rnd(14, 44, 1) * 500;
+    var interest = rnd(4, 16, 1) * 500;
+    var tax = rnd(10, 40, 1) * 500;
+    var ni = sales - cogs - wages - ins - rent - dep - interest - tax;
+    function acct(lo, hi, dlo, dhi) { var beg = rnd(lo, hi, 1) * 500; var d = (Math.random() < 0.5 ? -1 : 1) * rnd(dlo, dhi, 1) * 500; return { beg: beg, end: beg + d, d: d }; }
+    var AR = acct(20, 60, 2, 18), Inv = acct(50, 100, 4, 24), PreIns = acct(4, 14, 1, 5), PreRent = acct(4, 16, 1, 6);
+    var AP = acct(14, 40, 2, 14), WagesPay = acct(4, 16, 1, 6), IntPay = acct(2, 8, 1, 3), TaxPay = acct(4, 14, 1, 5);
+    var cust = sales - AR.d, supp = cogs + Inv.d - AP.d, wagesCash = wages - WagesPay.d, insCash = ins + PreIns.d, rentCash = rent + PreRent.d, intCash = interest - IntPay.d, taxCash = tax - TaxPay.d;
+    var op = cust - supp - wagesCash - insCash - rentCash - intCash - taxCash;
+
+    // noncurrent + equity, full balance sheet
+    var PPEbeg = rnd(150, 350, 1) * 1000;
+    var purchases = rnd(0, 60, 1) * 1000;
+    var PPEend = PPEbeg + purchases - dep;
+    var Landbeg = rnd(20, 120, 1) * 1000;
+    var Landend = Landbeg + rnd(0, 40, 1) * 1000;
+    var LTDbeg = rnd(60, 200, 1) * 1000;
+    var LTDend = LTDbeg + (Math.random() < 0.5 ? -1 : 1) * rnd(0, 40, 1) * 1000;
+    var CSbeg = rnd(80, 200, 1) * 1000;
+    var CSend = CSbeg + rnd(0, 40, 1) * 1000;
+    var REbeg = rnd(30, 150, 1) * 1000;
+    var div = rnd(2, 30, 1) * 1000;
+    var REend = REbeg + ni - div;
+
+    function cashPlug(cur, sfx) {
+      var liabEq = cur.AP + cur.WagesPay + cur.IntPay + cur.TaxPay + cur.LTD + cur.CS + cur.RE;
+      var noncash = cur.AR + cur.Inv + cur.PreIns + cur.PreRent + cur.PPE + cur.Land;
+      return liabEq - noncash;
+    }
+    var begCash = cashPlug({AP:AP.beg,WagesPay:WagesPay.beg,IntPay:IntPay.beg,TaxPay:TaxPay.beg,LTD:LTDbeg,CS:CSbeg,RE:REbeg,AR:AR.beg,Inv:Inv.beg,PreIns:PreIns.beg,PreRent:PreRent.beg,PPE:PPEbeg,Land:Landbeg});
+    var endCash = cashPlug({AP:AP.end,WagesPay:WagesPay.end,IntPay:IntPay.end,TaxPay:TaxPay.end,LTD:LTDend,CS:CSend,RE:REend,AR:AR.end,Inv:Inv.end,PreIns:PreIns.end,PreRent:PreRent.end,PPE:PPEend,Land:Landend});
+
+    var ok = ni > 10000 && op > 6000 && div < ni && REend > 5000 && LTDend > 20000 && PPEend > 60000 &&
+      cust > 0 && supp > 0 && wagesCash > 0 && insCash > 0 && rentCash > 0 && intCash > 0 && taxCash > 0 &&
+      AR.end > 2000 && Inv.end > 6000 && PreIns.end > 500 && PreRent.end > 500 &&
+      AP.end > 2000 && WagesPay.end > 500 && IntPay.end > 300 && TaxPay.end > 500 &&
+      begCash > 8000 && begCash < 110000 && endCash > 8000 && endCash < 110000;
+    if (ok) return { sales:sales,cogs:cogs,wages:wages,ins:ins,rent:rent,dep:dep,interest:interest,tax:tax,ni:ni,
+      AR:AR,Inv:Inv,PreIns:PreIns,PreRent:PreRent,AP:AP,WagesPay:WagesPay,IntPay:IntPay,TaxPay:TaxPay,
+      cust:cust,supp:supp,wagesCash:wagesCash,insCash:insCash,rentCash:rentCash,intCash:intCash,taxCash:taxCash,op:op,
+      PPEbeg:PPEbeg,PPEend:PPEend,Landbeg:Landbeg,Landend:Landend,LTDbeg:LTDbeg,LTDend:LTDend,CSbeg:CSbeg,CSend:CSend,REbeg:REbeg,REend:REend,div:div,begCash:begCash,endCash:endCash };
+  }
+}
+function startDirectCFProblem(mode) {
+  var p = makeDirect();
+  var wrap = problemTopbar();
+
+  var probCard = h('<div class="fs-card"></div>');
+  probCard.appendChild(h('<p class="prob-title">' + escapeHtml(p.company) + ': Statement of Cash Flows (Direct Method)</p>'));
+  probCard.appendChild(h('<p class="prob-instr">' + escapeHtml(p.company) + '\u2019s income statement and the current sections of its comparative balance sheets follow. Prepare the <strong>operating activities section</strong> of the statement of cash flows using the direct method.</p>'));
+
+  var is = h('<div class="fs-wrap"></div>');
+  is.innerHTML = '<table class="fs-table"><tbody>' +
+    '<tr class="head"><td class="lbl section">Income Statement</td><td class="amt">Current year</td></tr>' +
+    row1("Sales", dollar(p.sales)) +
+    row1("Cost of goods sold", fmt(p.cogs)) +
+    row1("Wages expense", fmt(p.wages)) +
+    row1("Insurance expense", fmt(p.ins)) +
+    row1("Rent expense", fmt(p.rent)) +
+    row1("Depreciation expense", fmt(p.dep)) +
+    row1("Interest expense", fmt(p.interest)) +
+    row1("Income tax expense", fmt(p.tax), "rule") +
+    row1("Net income", dollar(p.ni), "grand") +
+    '</tbody></table>';
+  probCard.appendChild(is);
+
+  var tcaEnd = p.endCash + p.AR.end + p.Inv.end + p.PreIns.end + p.PreRent.end;
+  var tcaBeg = p.begCash + p.AR.beg + p.Inv.beg + p.PreIns.beg + p.PreRent.beg;
+  var taEnd = tcaEnd + p.PPEend + p.Landend, taBeg = tcaBeg + p.PPEbeg + p.Landbeg;
+  var tclEnd = p.AP.end + p.WagesPay.end + p.IntPay.end + p.TaxPay.end;
+  var tclBeg = p.AP.beg + p.WagesPay.beg + p.IntPay.beg + p.TaxPay.beg;
+  var tlEnd = tclEnd + p.LTDend, tlBeg = tclBeg + p.LTDbeg;
+
+  var bs = h('<div class="fs-wrap" style="margin-top:26px"></div>');
+  bs.innerHTML = '<table class="fs-table two-col"><tbody>' +
+    '<tr class="head"><td class="lbl section">Balance Sheet</td><td class="amt">End of year</td><td class="amt">Start of year</td></tr>' +
+    '<tr class="head"><td class="lbl">Assets</td><td class="amt"></td><td class="amt"></td></tr>' +
+    row("Cash", dollar(p.endCash), dollar(p.begCash)) +
+    row("Accounts receivable", fmt(p.AR.end), fmt(p.AR.beg)) +
+    row("Inventory", fmt(p.Inv.end), fmt(p.Inv.beg)) +
+    row("Prepaid insurance", fmt(p.PreIns.end), fmt(p.PreIns.beg)) +
+    row("Prepaid rent", fmt(p.PreRent.end), fmt(p.PreRent.beg), "rule") +
+    row("Total current assets", fmt(tcaEnd), fmt(tcaBeg), "indent") +
+    row("Property and equipment, net", fmt(p.PPEend), fmt(p.PPEbeg)) +
+    row("Land", fmt(p.Landend), fmt(p.Landbeg), "rule") +
+    row("Total assets", dollar(taEnd), dollar(taBeg), "indent grand") +
+    spacer() +
+    '<tr class="head"><td class="lbl">Liabilities and Equity</td><td class="amt"></td><td class="amt"></td></tr>' +
+    row("Accounts payable", dollar(p.AP.end), dollar(p.AP.beg)) +
+    row("Wages payable", fmt(p.WagesPay.end), fmt(p.WagesPay.beg)) +
+    row("Interest payable", fmt(p.IntPay.end), fmt(p.IntPay.beg)) +
+    row("Income tax payable", fmt(p.TaxPay.end), fmt(p.TaxPay.beg), "rule") +
+    row("Total current liabilities", fmt(tclEnd), fmt(tclBeg), "indent") +
+    row("Long-term debt", fmt(p.LTDend), fmt(p.LTDbeg), "rule") +
+    row("Total liabilities", fmt(tlEnd), fmt(tlBeg), "indent") +
+    row("Common stock", fmt(p.CSend), fmt(p.CSbeg)) +
+    row("Retained earnings", fmt(p.REend), fmt(p.REbeg), "rule") +
+    row("Total liabilities and equity", dollar(tlEnd + p.CSend + p.REend), dollar(tlBeg + p.CSbeg + p.REbeg), "indent grand") +
+    '</tbody></table>';
+  probCard.appendChild(bs);
+  wrap.appendChild(probCard);
+
+  // answer key
+  function up(d) { return d > 0 ? "increase" : "decrease"; }
+  var custWork = fmt(p.sales) + " sales " + (p.AR.d > 0 ? "\u2212 " + fmt(p.AR.d) + " A/R increase" : "+ " + fmt(-p.AR.d) + " A/R decrease");
+  var suppWork = fmt(p.cogs) + " COGS " + (p.Inv.d > 0 ? "+ " + fmt(p.Inv.d) + " inventory increase" : "\u2212 " + fmt(-p.Inv.d) + " inventory decrease") + ", " + (p.AP.d > 0 ? "\u2212 " + fmt(p.AP.d) + " A/P increase" : "+ " + fmt(-p.AP.d) + " A/P decrease");
+  var wagesWork = fmt(p.wages) + " expense " + (p.WagesPay.d > 0 ? "\u2212 " + fmt(p.WagesPay.d) + " wages payable increase" : "+ " + fmt(-p.WagesPay.d) + " wages payable decrease");
+  var insWork = fmt(p.ins) + " expense " + (p.PreIns.d > 0 ? "+ " + fmt(p.PreIns.d) + " prepaid insurance increase" : "\u2212 " + fmt(-p.PreIns.d) + " prepaid insurance decrease");
+  var rentWork = fmt(p.rent) + " expense " + (p.PreRent.d > 0 ? "+ " + fmt(p.PreRent.d) + " prepaid rent increase" : "\u2212 " + fmt(-p.PreRent.d) + " prepaid rent decrease");
+  var intWork = fmt(p.interest) + " expense " + (p.IntPay.d > 0 ? "\u2212 " + fmt(p.IntPay.d) + " interest payable increase" : "+ " + fmt(-p.IntPay.d) + " interest payable decrease");
+  var taxWork = fmt(p.tax) + " expense " + (p.TaxPay.d > 0 ? "\u2212 " + fmt(p.TaxPay.d) + " income tax payable increase" : "+ " + fmt(-p.TaxPay.d) + " income tax payable decrease");
+
+  var ak = h('<div class="answer-key"></div>');
+  ak.appendChild(h('<p class="answer-key-head">Answer Key</p>'));
+  ak.appendChild(h('<p class="answer-key-sub">Net cash provided by operating activities = <strong style="color:var(--ink)">$' + fmt(p.op) + '</strong>.</p>'));
+
+  var card = h('<div class="ak-card"></div>');
+  card.appendChild(h('<p class="ak-method">Operating Activities (Direct Method)</p>'));
+  card.innerHTML += '<div style="overflow-x:auto"><table class="ak-table"><tbody>' +
+    akRow("Cash received from customers", fmt(p.cust), custWork) +
+    akRow("Cash paid to suppliers", fmt(-p.supp), suppWork) +
+    akRow("Cash paid for wages", fmt(-p.wagesCash), wagesWork) +
+    akRow("Cash paid for insurance", fmt(-p.insCash), insWork) +
+    akRow("Cash paid for rent", fmt(-p.rentCash), rentWork) +
+    akRow("Cash paid for interest", fmt(-p.intCash), intWork) +
+    akRow("Cash paid for income taxes", fmt(-p.taxCash), taxWork) +
+    akRowTotal("Net cash provided by operating activities", fmt(p.op)) +
+    '</tbody></table></div>' +
+    '<p class="ak-note"><strong>Each line converts one accrual figure to cash.</strong> Start with the income statement amount, then adjust for the change in its matching balance sheet account. For a revenue, an asset that grows (receivable) means you collected less than you earned, so subtract it. For an expense, an asset that grows (prepaid) means you paid more than you used, so add it; a payable that grows means you paid less than you owed, so subtract it.</p>' +
+    '<p class="ak-note"><strong>Depreciation is not here at all.</strong> The direct method lists only real cash flows. Depreciation never involved cash, so unlike the indirect method there is nothing to add back, it simply does not appear.</p>' +
+    '<p class="ak-note">Cash paid to suppliers takes two steps: cost of goods sold adjusted for the inventory change gives purchases, then purchases adjusted for the accounts payable change gives the cash actually paid.</p>';
+  ak.appendChild(card);
+
+  wrap.appendChild(newNumbersBtn(function () { startDirectCFProblem(mode); }));
+  wrap.appendChild(makeReveal(ak));
+  render(wrap);
+}
+
 /* ---------- Transactions to Financial Statements (Paul's Photography) ---------- */
 function makePaul() {
   var tries = 0, p;
@@ -1123,6 +1306,127 @@ function startAdjustmentsProblem(mode) {
   render(wrap);
 }
 
+/* ---------- Closing Entries (adjusted trial balance) ---------- */
+function makeClosing() {
+  var tries = 0;
+  while (tries < 9000) {
+    tries++;
+    var wages = rnd(80, 160, 1) * 500;
+    var rent = rnd(20, 60, 1) * 500;
+    var insurance = rnd(6, 20, 1) * 400;
+    var suppExp = rnd(10, 30, 1) * 400;
+    var advExp = rnd(8, 30, 1) * 400;
+    var deprT = rnd(8, 24, 1) * 500;
+    var deprE = rnd(2, 10, 1) * 400;
+    var totalExp = wages + rent + insurance + suppExp + advExp + deprT + deprE;
+    var ni = rnd(20, 80, 1) * 500;
+    var revenue = totalExp + ni;
+    var cash = rnd(6, 20, 1) * 500, ar = rnd(12, 40, 1) * 500, supplies = rnd(6, 20, 1) * 200, prepaidAdv = rnd(6, 20, 1) * 400;
+    var trucks = rnd(80, 140, 1) * 500, equipment = rnd(20, 50, 1) * 400;
+    var accumT = rnd(20, 60, 1) * 500, accumE = rnd(4, 20, 1) * 400;
+    var ap = rnd(4, 30, 1) * 200, scl = rnd(6, 30, 1) * 200, cs = rnd(10, 40, 1) * 500;
+    var lhsBs = cash + ar + supplies + prepaidAdv + trucks + equipment;
+    var otherCr = accumT + accumE + ap + scl + cs;
+    var re = lhsBs - otherCr - ni;
+    var totalDr = lhsBs + totalExp;
+    var totalCr = otherCr + re + revenue;
+    var ok = re > 4000 && accumT < trucks && accumE < equipment && ni > 8000 && totalDr === totalCr;
+    if (ok) return { wages:wages,rent:rent,insurance:insurance,suppExp:suppExp,advExp:advExp,deprT:deprT,deprE:deprE,totalExp:totalExp,ni:ni,revenue:revenue,
+      cash:cash,ar:ar,supplies:supplies,prepaidAdv:prepaidAdv,trucks:trucks,equipment:equipment,accumT:accumT,accumE:accumE,ap:ap,scl:scl,cs:cs,re:re,totalDr:totalDr,totalCr:totalCr };
+  }
+}
+function startClosingProblem(mode) {
+  var p = makeClosing();
+  var wrap = problemTopbar();
+
+  var probCard = h('<div class="fs-card"></div>');
+  probCard.appendChild(h('<p class="prob-title" style="text-align:left">Closing Entries</p>'));
+  probCard.appendChild(h('<p class="prob-instr">The adjusted trial balance for a company at December 31 follows.</p>'));
+
+  function tbRow(label, dr, cr, cls) {
+    return '<tr class="' + (cls || "") + '"><td class="lbl">' + escapeHtml(label) + '</td><td class="amt">' + dr + '</td><td class="amt">' + cr + '</td></tr>';
+  }
+  var tb = h('<div class="fs-wrap"></div>');
+  tb.innerHTML = '<table class="fs-table two-col"><tbody>' +
+    '<tr class="head"><td class="lbl section">December 31</td><td class="amt">Debit</td><td class="amt">Credit</td></tr>' +
+    tbRow("Cash", dollar(p.cash), "") +
+    tbRow("Accounts receivable", fmt(p.ar), "") +
+    tbRow("Supplies", fmt(p.supplies), "") +
+    tbRow("Prepaid advertising", fmt(p.prepaidAdv), "") +
+    tbRow("Trucks", fmt(p.trucks), "") +
+    tbRow("Accumulated depreciation, trucks", "", dollar(p.accumT)) +
+    tbRow("Equipment", fmt(p.equipment), "") +
+    tbRow("Accumulated depreciation, equipment", "", fmt(p.accumE)) +
+    tbRow("Accounts payable", "", fmt(p.ap)) +
+    tbRow("Service contract liabilities", "", fmt(p.scl)) +
+    tbRow("Common stock", "", fmt(p.cs)) +
+    tbRow("Retained earnings", "", fmt(p.re)) +
+    tbRow("Service fees revenue", "", fmt(p.revenue)) +
+    tbRow("Wages expense", fmt(p.wages), "") +
+    tbRow("Rent expense", fmt(p.rent), "") +
+    tbRow("Insurance expense", fmt(p.insurance), "") +
+    tbRow("Supplies expense", fmt(p.suppExp), "") +
+    tbRow("Advertising expense", fmt(p.advExp), "") +
+    tbRow("Depreciation expense, trucks", fmt(p.deprT), "") +
+    tbRow("Depreciation expense, equipment", fmt(p.deprE), "", "rule") +
+    tbRow("Totals", dollar(p.totalDr), dollar(p.totalCr), "grand") +
+    '</tbody></table>';
+  probCard.appendChild(tb);
+  probCard.appendChild(h('<p class="prob-instr" style="margin:18px 0 6px"><strong>Required:</strong></p>'));
+  probCard.appendChild(h('<ol class="rat-list" style="list-style-type:lower-alpha"><li>Prepare closing entries in journal entry form.</li><li>Compute the ending balance in Retained Earnings after closing.</li></ol>'));
+  wrap.appendChild(probCard);
+
+  // answer key
+  function jeRow(ref, acct, dr, cr, indent) {
+    return '<tr><td class="je-ref">' + (ref || "") + '</td><td class="je-acct"' + (indent ? ' style="padding-left:24px"' : '') + '>' + escapeHtml(acct) + '</td><td class="je-num">' + (dr || "") + '</td><td class="je-num">' + (cr || "") + '</td></tr>';
+  }
+  var rows = "";
+  rows += jeRow("(1)", "Service Fees Revenue", fmt(p.revenue), "");
+  rows += jeRow("", "Retained Earnings", "", fmt(p.revenue), true);
+  rows += '<tr class="memo-row"><td></td><td colspan="3"><span class="je-memo">To close the revenue account.</span></td></tr>';
+  rows += jeRow("(2)", "Retained Earnings", fmt(p.totalExp), "");
+  rows += jeRow("", "Wages Expense", "", fmt(p.wages), true);
+  rows += jeRow("", "Rent Expense", "", fmt(p.rent), true);
+  rows += jeRow("", "Insurance Expense", "", fmt(p.insurance), true);
+  rows += jeRow("", "Supplies Expense", "", fmt(p.suppExp), true);
+  rows += jeRow("", "Advertising Expense", "", fmt(p.advExp), true);
+  rows += jeRow("", "Depreciation Expense, Trucks", "", fmt(p.deprT), true);
+  rows += jeRow("", "Depreciation Expense, Equipment", "", fmt(p.deprE), true);
+  rows += '<tr class="memo-row"><td></td><td colspan="3"><span class="je-memo">To close the expense accounts.</span></td></tr>';
+
+  var ak = h('<div class="answer-key"></div>');
+  ak.appendChild(h('<p class="answer-key-head">Answer Key</p>'));
+  ak.appendChild(h('<p class="answer-key-sub">Two entries close the temporary accounts. Net effect on Retained Earnings = ' + fmt(p.revenue) + ' revenue \u2212 ' + fmt(p.totalExp) + ' expenses = <strong style="color:var(--ink)">' + fmt(p.ni) + '</strong>, which is net income.</p>'));
+
+  var je = h('<div class="ak-card"></div>');
+  je.appendChild(h('<p class="ak-method">Closing Journal Entries</p>'));
+  je.innerHTML += '<div style="overflow-x:auto"><table class="je-table"><thead><tr><th>Ref</th><th>Account</th><th class="num">Debit</th><th class="num">Credit</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  ak.appendChild(je);
+
+  var reCard = h('<div class="ak-card"></div>');
+  reCard.appendChild(h('<p class="ak-method">Ending Retained Earnings</p>'));
+  reCard.innerHTML += '<div style="overflow-x:auto"><table class="ak-table"><tbody>' +
+    akRow("Beginning retained earnings", fmt(p.re), "the balance shown in the adjusted trial balance") +
+    akRow("Add: revenue closed in", fmt(p.revenue), "from closing entry 1") +
+    akRow("Less: expenses closed in", fmt(-p.totalExp), "from closing entry 2") +
+    akRowTotal("Ending retained earnings", fmt(p.re + p.ni)) +
+    '</tbody></table></div>' +
+    '<p class="ak-note">Same shortcut: ending RE = beginning RE + net income = ' + fmt(p.re) + ' + ' + fmt(p.ni) + ' = <strong>' + fmt(p.re + p.ni) + '</strong>. The two closing entries are what actually move that ' + fmt(p.ni) + ' of net income into Retained Earnings, one crediting it for revenue and one debiting it for expenses.</p>';
+  ak.appendChild(reCard);
+
+  var notes = h('<div class="ak-card"></div>');
+  notes.innerHTML = '<p class="ak-method">How closing works</p>' +
+    '<p class="ak-note"><strong>Only temporary accounts get closed:</strong> revenues, expenses, and dividends. Their balances are reset to zero so the next period starts fresh. Permanent accounts (assets, liabilities, common stock, retained earnings) carry forward and are never closed. There is no dividends account here, so there are just two entries.</p>' +
+    '<p class="ak-note"><strong>Revenue has a credit balance,</strong> so you debit it to bring it to zero, with the offset credited to Retained Earnings.</p>' +
+    '<p class="ak-note"><strong>Expenses have debit balances,</strong> so you credit each one to bring it to zero, with the offset debited to Retained Earnings for the total of all expenses.</p>' +
+    '<p class="ak-note">This textbook closes directly to Retained Earnings. Some courses route everything through an Income Summary account first, then close Income Summary to Retained Earnings, which gives the same ending balance.</p>';
+  ak.appendChild(notes);
+
+  wrap.appendChild(newNumbersBtn(function () { startClosingProblem(mode); }));
+  wrap.appendChild(makeReveal(ak));
+  render(wrap);
+}
+
 /* ---------- Calculating Ratios (Target-style structure, randomized) ---------- */
 var RATIO_COMPANIES = ["Redwood Retail", "Cornerstone Stores", "Brightline Retail", "Harbor Point Retail", "Cedar & Co.", "Northgate Retail"];
 function makeRatios() {
@@ -1156,7 +1460,7 @@ function makeRatios() {
     var disc=rnd(0,30,1);
     var ni=niCont+disc;
     var ok = cur.se>4000 && pri.se>4000 && opInc>1500 && ebt>1000 && niCont>500 && cur.tl>cur.se && sales>costSales+sga+da;
-    if (ok) return {company:pick(RATIO_COMPANIES),cur:cur,pri:pri,sales:sales,costSales:costSales,sga:sga,da:da,opInc:opInc,interest:interest,other:other,ebt:ebt,tax:tax,niCont:niCont,disc:disc,ni:ni};
+    if (ok) return {company:pick(RATIO_COMPANIES),cur:cur,pri:pri,sales:sales,costSales:costSales,sga:sga,da:da,opInc:opInc,interest:interest,other:other,ebt:ebt,tax:tax,taxRate:taxRate,niCont:niCont,disc:disc,ni:ni};
   }
 }
 function pct(x) { return (x * 100).toFixed(1) + "%"; }
@@ -1216,7 +1520,7 @@ function startRatiosProblem(mode) {
     '</tbody></table>';
   probCard.appendChild(is);
 
-  probCard.appendChild(h('<p class="prob-instr" style="margin:24px 0 0"><strong>Calculate the following ratios for the current fiscal year.</strong> Use average balances (beginning + ending, \u00f7 2) for the balance sheet figures in the return and turnover ratios.</p>'));
+  probCard.appendChild(h('<p class="prob-instr" style="margin:24px 0 0"><strong>Calculate the following ratios for the current fiscal year.</strong> Use average balances (beginning + ending, \u00f7 2) for the balance sheet figures in the return and turnover ratios. The company\u2019s tax rate is <strong>' + pct(p.taxRate) + '</strong> (needed for EWI).</p>'));
   probCard.appendChild(h('<ol class="rat-list">' +
     '<li>EWI (earnings without interest)</li><li>Gross profit margin</li><li>Profit margin</li>' +
     '<li>Return on assets (ROA)</li><li>Return on equity (ROE)</li><li>Asset turnover rate</li>' +
@@ -1227,13 +1531,13 @@ function startRatiosProblem(mode) {
 
   // computed answers
   var avgTA = (c.ta + pr.ta) / 2, avgSE = (c.se + pr.se) / 2, avgInv = (c.inv + pr.inv) / 2, avgPPE = (c.ppe + pr.ppe) / 2;
-  var taxRate = p.tax / p.ebt;
+  var taxRate = p.taxRate;
   var atInt = p.interest * (1 - taxRate);
   var ewi = p.ni + atInt;
 
   var ak = h('<div class="answer-key"></div>');
   ak.appendChild(h('<p class="answer-key-head">Answer Key</p>'));
-  ak.appendChild(h('<p class="answer-key-sub">Work these two first, everything else uses them: <strong style="color:var(--ink)">tax rate</strong> = ' + fmt(p.tax) + ' \u00f7 ' + fmt(p.ebt) + ' = ' + pct(taxRate) + ', and <strong style="color:var(--ink)">EWI</strong> = ' + fmt(Math.round(ewi)) + '.</p>'));
+  ak.appendChild(h('<p class="answer-key-sub">EWI is the building block for several ratios below. Using the given tax rate of ' + pct(taxRate) + ': EWI = ' + fmt(p.ni) + ' + [' + fmt(p.interest) + ' \u00d7 (1 \u2212 ' + dec(taxRate) + ')] = <strong style="color:var(--ink)">' + fmt(Math.round(ewi)) + '</strong>.</p>'));
 
   var card = h('<div class="ak-card"></div>');
   card.appendChild(h('<p class="ak-method">Ratio Calculations</p>'));
